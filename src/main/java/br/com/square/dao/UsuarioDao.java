@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -43,27 +44,21 @@ public class UsuarioDao {
 	}
 
 	public boolean autentica(Usuario usuario) {
-		String jpql = "SELECT u FROM Usuario u "
-				+ "WHERE u.email = :email AND u.senha = :senha";
-
-		this.manager.joinTransaction();
-		Query query = this.manager.createQuery(jpql);
-		query.setParameter("email", usuario.getEmail());
-		query.setParameter("senha", usuario.getSenha());
-
-		return !query.getResultList().isEmpty();
+		return this.buscaPorEmailESenha(usuario) != null;
 	}
 
 	public Usuario buscaPorEmailESenha(Usuario usuario) {
 		String jpql = "SELECT u FROM Usuario u "
 				+ "WHERE u.email = :email "
 				+ "AND u.senha = :senha";
-		
-		this.manager.joinTransaction();
-		TypedQuery<Usuario> query = this.manager.createQuery(jpql, Usuario.class);
-		query.setParameter("email", usuario.getEmail());
-		query.setParameter("senha", usuario.getSenha());
-		
-		return query.getSingleResult();
+		try {
+			this.manager.joinTransaction();
+			TypedQuery<Usuario> query = this.manager.createQuery(jpql, Usuario.class);
+			query.setParameter("email", usuario.getEmail());
+			query.setParameter("senha", usuario.getSenha());
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 }
