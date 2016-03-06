@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<h:outputStylesheet name="style.css" library="css"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Sistema de Notas Fiscais</title>
+</h:head>
+<h:body>
+	<div id="conteudo">
+		
+	<div id="cabecalho">
+		<h:graphicImage library="imagens" name="logo-uber.png" id="logoCompany"/>
+	</div>
+		
+		<h2>Login do Sistema</h2>
+		
+		<fieldset>
+			<h:panelGrid columns="2" styleClass="campos">
+				<h:form>
+				
+					<h:outputLabel value="Login" for="login"/>
+					<h:inputText id="login" value="#{loginBean.usuario.login}"/>
+					
+					<h:outputLabel value="Senha" for="senha"/>
+					<h:inputSecret id="senha" value="#{loginBean.usuario.senha}"/>
+					
+					<h:commandButton action="#{loginBean.efetuaLogin}" value="Efetuar Login"/>
+						
+				</h:form>
+			</h:panelGrid>
+		</fieldset>
+	</div> <!-- Fim div conteudo -->
+	
+	<div id="rodape">
+		Copyright 2016
+		Todos os direitos reservados a Renato Francisco da Silva.
+	</div>
+</h:body>
+</html>
