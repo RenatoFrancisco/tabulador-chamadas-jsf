@@ -10,7 +10,8 @@
 	<ui:define name="corpo">
 		<h2>Tabular Chamadas</h2>
 		<h:form>
-			<p:fieldset legend="Dados da Tabulação">
+			<fieldset>
+				<legend>Dados da Tabulação</legend>
 				<h:panelGrid columns="2">	
 							
 					<h:outputLabel value="Data da Chamada:" for="dtChamada"/>
@@ -59,11 +60,8 @@
 						<f:ajax execute="@form" render=":formTabela"/>
 					</p:commandButton>
 					
-					<p:commandButton value="Limpar" action="#{tabulacaoBean.limpa}" icon="ui-icon-close">
-						<f:ajax render="@form"/>
-					</p:commandButton>
 				</h:panelGrid>
-			</p:fieldset>
+			</fieldset>
 		</h:form>
 		
 		<!-- TABELA DE TABULAÇÕES-->
