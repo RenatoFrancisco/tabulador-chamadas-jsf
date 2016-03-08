@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:ui="http://java.sun.com/jsf/facelets">	
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">	
 
 <ui:composition template="_template.xhtml">
 	<ui:define name="corpo">
@@ -23,70 +24,67 @@
 				<legend>Dados da Árvore</legend>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Produto" for="produto" />
-					<h:selectOneMenu id="produto" value="#{arvoreBean.produtoSelecionado}">
+					<p:selectOneMenu id="produto" value="#{arvoreBean.produtoSelecionado}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
 						<f:selectItems value="#{produtoBean.produtos}" var="produto"
 							 itemValue="#{produto.nome}" itemLabel="#{produto.nome}" />
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 					
 					<h:outputLabel value="Motivo:" for="motivo"/>
-					<h:inputText id="motivo" value="#{arvoreBean.arvoreComProduto.motivo}" />
+					<p:inputText id="motivo" value="#{arvoreBean.arvoreComProduto.motivo}" />
 					
 					<h:outputLabel value="Submotivo:" for="submotivo"/>
-					<h:inputText id="submotivo" value="#{arvoreBean.arvoreComProduto.submotivo}" />
+					<p:inputText id="submotivo" value="#{arvoreBean.arvoreComProduto.submotivo}" />
 					
 					<h:outputLabel value="Detalhe:" for="detalhe"/>
-					<h:inputText id="detalhe" value="#{arvoreBean.arvoreComProduto.detalhe}" />
+					<p:inputText id="detalhe" value="#{arvoreBean.arvoreComProduto.detalhe}" />
 					
 					<h:outputLabel value="Ativo" for="ativo"/>
-					<h:selectBooleanCheckbox id="ativo" value="#{arvoreBean.arvoreComProduto.ativo}" />
+					<p:selectBooleanCheckbox id="ativo" value="#{arvoreBean.arvoreComProduto.ativo}" />
 					
-					<h:commandButton action="#{arvoreBean.salva}" value="Salvar">
-						<f:ajax execute="@form" render="@form :formTabela" />
-					</h:commandButton>
+					<p:commandButton action="#{arvoreBean.salva}" value="Salvar" update="@form :formTabela"
+						icon="ui-icon-disk"/>
 				</h:panelGrid>
 			</fieldset>
 		</h:form>
 		
 		<h2>Elementos da Árvore</h2>
 		<h:form id="formTabela">
-			<h:dataTable value="#{arvoreBean.arvores}" var="arvore"
-				styleClass="dados" rowClasses="impar, par">
-			
-				<h:column>
+			<p:dataTable value="#{arvoreBean.arvores}" var="arvore"
+				paginator="true" rows="10">
+				<p:column sortBy="#{arvore.produto}">
 					<f:facet name="header">Produto</f:facet>
 					#{arvore.produto}
-				</h:column>
+				</p:column>
 				
-				<h:column>
+				<p:column>
 					<f:facet name="header">Motivo</f:facet>
 					#{arvore.motivo}
-				</h:column>
+				</p:column>
 				
-				<h:column>
+				<p:column>
 					<f:facet name="header">Submotivo</f:facet>
 					#{arvore.submotivo}
-				</h:column>
+				</p:column>
 				
-				<h:column>
+				<p:column>
 					<f:facet name="header">Detalhe</f:facet>
 					#{arvore.detalhe}
-				</h:column>
+				</p:column>
 				
-				<h:column>
+				<p:column>
 					<f:facet name="header">Ativo?</f:facet>
 					<h:outputText value="Sim"  rendered="#{arvore.ativo}"/>
 					<h:outputText value="Não"  rendered="#{!arvore.ativo}"/>
-				</h:column>
+				</p:column>
 				
-				<h:column>
-					<h:commandLink value="Alterar" >
+				<p:column>
+					<p:commandLink value="Alterar" update=":formArvore">
 						<f:setPropertyActionListener value="#{arvore}" target="#{arvoreBean.arvoreComProduto}" />
 						<f:setPropertyActionListener value="#{arvore.produto}" target="#{arvoreBean.produtoSelecionado}" />
-						<f:ajax render=":formArvore"/>
-					</h:commandLink>
-				</h:column>
-			</h:dataTable>
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
 		</h:form>
 	</ui:define>
 </ui:composition>
