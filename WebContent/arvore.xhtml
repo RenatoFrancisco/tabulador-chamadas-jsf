@@ -39,7 +39,7 @@
 					<h:outputLabel value="Detalhe:" for="detalhe"/>
 					<p:inputText id="detalhe" value="#{arvoreBean.arvoreComProduto.detalhe}" />
 					
-					<h:outputLabel value="Ativo" for="ativo"/>
+					<h:outputLabel value="Habilitado:" for="ativo"/>
 					<p:selectBooleanCheckbox id="ativo" value="#{arvoreBean.arvoreComProduto.ativo}" />
 					
 					<p:commandButton action="#{arvoreBean.salva}" value="Salvar" update="@form :formTabela"
@@ -73,7 +73,7 @@
 				</p:column>
 				
 				<p:column>
-					<f:facet name="header">Ativo?</f:facet>
+					<f:facet name="header">Habilitado</f:facet>
 					<h:outputText value="Sim"  rendered="#{arvore.ativo}"/>
 					<h:outputText value="Não"  rendered="#{!arvore.ativo}"/>
 				</p:column>
