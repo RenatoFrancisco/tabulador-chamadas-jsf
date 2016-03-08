@@ -10,9 +10,8 @@
 	<ui:define name="corpo">
 		<h2>Tabular Chamadas</h2>
 		<h:form>
-			<fieldset>
-				<legend>Dados da Tabulação</legend>
-					<h:panelGrid columns="2">	
+			<p:fieldset legend="Dados da Tabulação">
+				<h:panelGrid columns="2">	
 							
 					<h:outputLabel value="Data da Chamada:" for="dtChamada"/>
 					<p:calendar id="dtChamada" value="#{tabulacaoBean.tabulacao.dataChamada.time}"
@@ -56,15 +55,15 @@
 					<h:outputLabel value="Descrição:" for="descricao"/>
 					<p:inputTextarea id="descricao" value="#{tabulacaoBean.tabulacao.descricao}" rows="5" cols="35" />
 					
-					<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-disk">
+					<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-check">
 						<f:ajax execute="@form" render=":formTabela"/>
 					</p:commandButton>
 					
-					<p:commandButton value="Limpar" action="#{tabulacaoBean.limpa}" icon="ui-icon-trash">
+					<p:commandButton value="Limpar" action="#{tabulacaoBean.limpa}" icon="ui-icon-close">
 						<f:ajax render="@form"/>
 					</p:commandButton>
 				</h:panelGrid>
-			</fieldset>
+			</p:fieldset>
 		</h:form>
 		
 		<!-- TABELA DE TABULAÇÕES-->
