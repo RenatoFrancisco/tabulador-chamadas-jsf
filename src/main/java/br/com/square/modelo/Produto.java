@@ -19,6 +19,8 @@ public class Produto {
 
 	private String nome;
 
+	private boolean ativo;
+
 	@OneToMany(mappedBy = "produto")
 	private List<Tabulacao> tabulacoes;
 
@@ -60,5 +62,13 @@ public class Produto {
 	public void addArvore(Arvore arvore) {
 		this.arvores.add(arvore);
 		arvore.getProdutos().add(this);
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 }
