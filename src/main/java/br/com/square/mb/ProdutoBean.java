@@ -22,6 +22,10 @@ public class ProdutoBean implements Serializable {
 	public Produto getProduto() {
 		return produto;
 	}
+	
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
 
 	public List<Produto> getProdutos() {
 		if (this.produtos == null) {
@@ -29,8 +33,23 @@ public class ProdutoBean implements Serializable {
 		}
 		return produtos;
 	}
+	
+	public void salva() {
+		if(this.produto.getId() == 0L) {
+			this.produtoDao.adiciona(this.produto);
+		} else {
+			this.produtoDao.atualiza(produto);
+		}
+		
+		this.listaTodos();
+		this.limpa();
+	}
 
 	private void listaTodos() {
 		this.produtos = this.produtoDao.lista();
+	}
+	
+	private void limpa() {
+		this.produto = new Produto();
 	}
 }

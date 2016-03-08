@@ -8,7 +8,49 @@
 	
 	<ui:composition template="_template.xhtml">
 		<ui:define name="corpo">
+			<h:form id="formProduto">
 			
+				<h:inputHidden value="#{produtoBean.produto.id}"/>
+				
+				<h2>
+					<h:outputText value="Adicionar um Produto" 
+						rendered="#{produtoBean.produto.id == 0}"/>
+						
+					<h:outputText value="Editar um Produto"
+						rendered="#{produtoBean.produto.id != 0}"/>
+				</h2>
+				<fieldset>
+					<legend>Dados do Produto</legend>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Nome:" for="nome"/>
+						<p:inputText id="produto" value="#{produtoBean.produto.nome}"/>
+						
+						<h:outputLabel value="Habilitar:" for="ativo"/>
+						<p:selectBooleanCheckbox id="ativo" value="#{produtoBean.produto.ativo}"/>
+						
+						<p:commandButton value="Salvar" action="#{produtoBean.salva}" icon="ui-icon-disk"
+							update="@form :formTabela"/>
+					</h:panelGrid>
+				</fieldset>
+			</h:form>	
+			
+			<h2>Produtos</h2>
+			<h:form id="formTabela">
+				<p:dataTable value="#{produtoBean.produtos}" var="produto">
+					<p:column headerText="Nome">
+						#{produto.nome}
+					</p:column>
+					<p:column headerText="Habilitado">
+						<h:outputText value="Sim" rendered="#{produto.ativo}"/>
+						<h:outputText value="Não" rendered="#{!produto.ativo}"/>
+					</p:column>
+					<p:column>
+						<p:commandLink value="Alterar" update="@form :formProduto">
+							<f:setPropertyActionListener value="#{produto}" target="#{produtoBean.produto}"/>
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</h:form>
 		</ui:define>
 	</ui:composition>
 </html>
