@@ -27,6 +27,10 @@ public class Usuario {
 
 	@OneToMany(mappedBy = "usuario")
 	List<Tabulacao> tabulacoes;
+	
+	public boolean isAdministrador() {
+		return "Administrador".equals(this.perfil.getNome());
+	}
 
 	public List<Tabulacao> getTabulacoes() {
 		return tabulacoes;

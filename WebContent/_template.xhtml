@@ -31,10 +31,11 @@
 					<p:menuitem value="Sair" icon="ui-icon-power" action="#{loginBean.efetuaLogout}"/>
 				</p:submenu>
 				<p:submenu label="Usuário" icon="ui-icon-person">			
-					<p:menuitem value="Adicionar" icon="ui-icon-plus" url="novo-usuario.xhtml"/>
+					<p:menuitem value="Adicionar" icon="ui-icon-plus" url="novo-usuario.xhtml"
+						disabled="#{!usuarioLogadoBean.usuario.administrador}"/>
 					<p:menuitem value="Alterar senha" icon="ui-icon-locked" url="#" />
 				</p:submenu>
-				<p:submenu label="Editar" icon="ui-icon-pencil">
+				<p:submenu label="Editar" icon="ui-icon-pencil" rendered="#{usuarioLogadoBean.usuario.administrador}">
 					<p:menuitem value="Produto" icon="ui-icon-suitcase" url="#"/>			
 					<p:menuitem value="Árvore" icon="ui-icon-note" url="arvore.xhtml"/>
 					<p:menuitem value="Site" icon="ui-icon-home" url="#"/>
