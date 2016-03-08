@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="_template.xhtml">
 	<ui:define name="corpo">
@@ -22,61 +23,57 @@
 				<legend>Dados do Usuário</legend>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Nome:" for="nome"/>
-					<h:inputText id="nome" value="#{usuarioBean.usuario.nome}" />
+					<p:inputText id="nome" value="#{usuarioBean.usuario.nome}" />
 					
 					<h:outputLabel value="E-mail:" for="email"/>
-					<h:inputText id="email" value="#{usuarioBean.usuario.email}" />
+					<p:inputText id="email" value="#{usuarioBean.usuario.email}" />
 					
 					<h:outputLabel value="Perfil:" for="perfil"/>
-					<h:selectOneMenu id="perfil" value="#{usuarioBean.perfilNome}">
+					<p:selectOneMenu id="perfil" value="#{usuarioBean.perfilNome}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
 						<f:selectItems value="#{usuarioBean.perfis}" var="perfil"
 							itemValue="#{perfil.nome}" itemLabel="#{perfil.nome}"
 						/>
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 					
 					<h:outputLabel value="Senha:" for="senha"/>
-					<h:inputSecret id="senha" value="#{usuarioBean.usuario.senha}" />
+					<p:password id="senha" value="#{usuarioBean.usuario.senha}" feedback="true"/>
 					
-					<h:commandButton value="Salvar" action="#{usuarioBean.salva}">
-						<f:ajax execute="@form" render="@form :formTabela"/>
-					</h:commandButton>
+					<p:commandButton value="Salvar" action="#{usuarioBean.salva}" icon="ui-icon-disk" 
+						update="@form :formTabela"/>
 				</h:panelGrid>
 			</fieldset>
 		</h:form>
 		
 		<h2>Lista de Usuários</h2>
 		<h:form id="formTabela">
-			<h:dataTable value="#{usuarioBean.usuarios}" var="usuario"
-			styleClass="dados" rowClasses="impar, par">
-				<h:column>
+			<p:dataTable value="#{usuarioBean.usuarios}" var="usuario">
+				<p:column>
 					<f:facet name="header">Nome</f:facet>
 					#{usuario.nome}
-				</h:column>
+				</p:column>
 				
-				<h:column>
+				<p:column>
 					<f:facet name="header">E-mail</f:facet>
 					#{usuario.email}
-				</h:column>
+				</p:column>
 				
-				<h:column>
+				<p:column>
 					<f:facet name="header">Perfil</f:facet>
 					#{usuario.perfil.nome}
-				</h:column>
+				</p:column>
 				
-				<h:column>
-					<h:commandLink action="#{usuarioBean.remove(usuario)}" value="Remover">
-						<f:ajax render="@form"/>
-					</h:commandLink>
-				</h:column>
-				<h:column>
-					<h:commandLink value="Alterar">
+				<p:column>
+					<p:commandLink action="#{usuarioBean.remove(usuario)}" value="Remover" 
+						update="@form"/>
+				</p:column>
+				<p:column>
+					<p:commandLink value="Alterar" update=":formUsuario :formTabela">
 						<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}" />
 						<f:setPropertyActionListener value="#{usuario.perfil.nome}" target="#{usuarioBean.perfilNome}" />
-						<f:ajax render=":formUsuario :formTabela"/>
-					</h:commandLink>
-				</h:column>
-			</h:dataTable>
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
 		</h:form>
 	</ui:define>
 </ui:composition>
