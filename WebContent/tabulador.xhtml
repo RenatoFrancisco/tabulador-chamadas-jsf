@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="_template.xhtml">
 	<ui:define name="corpo">
@@ -14,54 +15,54 @@
 					<h:panelGrid columns="2">	
 							
 					<h:outputLabel value="Data da Chamada:" for="dtChamada"/>
-					<h:inputText id="dtChamada" value="#{tabulacaoBean.tabulacao.dataChamada.time}">
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/> 
-					</h:inputText>
+					<p:calendar id="dtChamada" value="#{tabulacaoBean.tabulacao.dataChamada.time}"
+						pattern="dd/MM/yyyy" mask="true" />
 					
 					<h:outputLabel value="Terminal:" for="terminal"/>
-					<h:inputText id="terminal" value="#{tabulacaoBean.tabulacao.terminal}"/>
+					<p:inputMask id="terminal" value="#{tabulacaoBean.tabulacao.terminal}"
+						mask="(99) 9999-9999"/>
 					
 					<h:outputLabel value="Produto:" for="produto"/>
-					<h:selectOneMenu id="produto" value="#{tabulacaoBean.produtoSelecionado}">
+					<p:selectOneMenu id="produto" value="#{tabulacaoBean.produtoSelecionado}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
 						<f:selectItems value="#{produtoBean.produtos}" var="produto"
 							itemValue="#{produto.id}" itemLabel="#{produto.nome}" />
 						<f:ajax execute="@this" render="motivo"/>
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 					
 					<h:outputLabel value="Motivo:" for="motivo"/>
-					<h:selectOneMenu id="motivo" value="#{tabulacaoBean.motivoSelecionado}">
+					<p:selectOneMenu id="motivo" value="#{tabulacaoBean.motivoSelecionado}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
 						<f:selectItems value="#{tabulacaoBean.motivos}" var="motivo"
 							itemValue="#{motivo}" itemLabel="#{motivo}"/>
 						<f:ajax excute="@this" render="submotivo"/>
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 					
 					<h:outputLabel value="Submotivo:" for="submotivo"/>
-					<h:selectOneMenu id="submotivo" value="#{tabulacaoBean.subMotivoSelecionado}">
+					<p:selectOneMenu id="submotivo" value="#{tabulacaoBean.subMotivoSelecionado}">
 						<f:selectItem itemLabel="-- Selecione -- " noSelectionOption="true"/>
 						<f:selectItems value="#{tabulacaoBean.subMotivos}" var="submotivo"
 							itemValue="#{submotivo}" itemLabel="#{submotivo}" />
 						<f:ajax execute="@this" render="detalhe"/>
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 					
 					<h:outputLabel value="Detalhe:" for="detalhe"/>
-					<h:selectOneMenu id="detalhe" value="#{tabulacaoBean.detalheSelecionado}">
+					<p:selectOneMenu id="detalhe" value="#{tabulacaoBean.detalheSelecionado}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
 						<f:selectItems value="#{tabulacaoBean.detalhes}" var="detalhe"
 							itemValue="#{detalhe}" itemLabel="#{detalhe}" />
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 					
 					<h:outputLabel value="Descrição:" for="descricao"/>
-					<h:inputTextarea id="descricao" value="#{tabulacaoBean.tabulacao.descricao}" rows="5" cols="35"/>
+					<p:inputTextarea id="descricao" value="#{tabulacaoBean.tabulacao.descricao}" rows="5" cols="35" />
 					
-					<h:commandButton value="Tabular" action="#{tabulacaoBean.tabula}">
+					<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-disk">
 						<f:ajax execute="@form" render=":formTabela"/>
-					</h:commandButton>
+					</p:commandButton>
 					
-					<h:commandButton value="Limpar" action="#{tabulacaoBean.limpa}" >
+					<p:commandButton value="Limpar" action="#{tabulacaoBean.limpa}" icon="ui-icon-trash">
 						<f:ajax render="@form"/>
-					</h:commandButton>
+					</p:commandButton>
 				</h:panelGrid>
 			</fieldset>
 		</h:form>
@@ -71,61 +72,62 @@
 		<h2>Tabulações</h2>
 			
 		<h:form id="formTabela">
-			<h:dataTable value="#{tabulacaoBean.tabulacoes}" var="tabulacao"
-				styleClass="dados" rowClasses="impar, par">
-				<h:column>
+			<p:dataTable value="#{tabulacaoBean.tabulacoes}" var="tabulacao"
+				paginator="true" rows="10">
+				
+				<p:column sortBy="#{tabulacao.dataChamada.time}">
 					<f:facet name="header">Data da Chamada</f:facet>
 					<h:outputText
 						value="#{tabulacao.dataChamada.time}" >
 						<f:convertDateTime pattern="dd/MM/yyyy"
 							timeZone="America/Sao_Paulo" />
 					</h:outputText>
-				</h:column>
+				</p:column>
 				
-				<h:column>
+				<p:column>
 					<f:facet name="header">Terminal</f:facet>
 					#{tabulacao.terminal}
-				</h:column>
+				</p:column>
 				
-				<h:column>
+				<p:column>
 					<f:facet name="header">Produto</f:facet>
 					#{tabulacao.produto}
-				</h:column>
+				</p:column>
 				
-				<h:column>
+				<p:column>
 					<f:facet name="header">Motivo</f:facet>
 					#{tabulacao.motivo}
-				</h:column>
+				</p:column>
 				
-				<h:column>
+				<p:column>
 					<f:facet name="header">Submotivo</f:facet>
 					#{tabulacao.submotivo}
-				</h:column>
+				</p:column>
 				
-				<h:column>
+				<p:column>
 					<f:facet name="header">Detalhe</f:facet>
 					#{tabulacao.detalhe}
-				</h:column>
+				</p:column>
 				
-				<h:column>
+				<p:column>
 					<f:facet name="header">Descrição</f:facet>
 					#{tabulacao.descricao}
-				</h:column>
+				</p:column>
 				
-				<h:column>
+				<p:column>
 					<f:facet name="header">Nome do Usuário</f:facet>
 					#{tabulacao.nomeUsuario}
-				</h:column>
+				</p:column>
 				
-				<h:column>
+				<p:column>
 					<f:facet name="header">Data da Tabulacao</f:facet>
 					<h:outputText
 						value="#{tabulacao.dataTabulacao.time}" >
 						<f:convertDateTime pattern="dd/MM/yyyy - HH:mm:ss"
 							timeZone="America/Sao_Paulo" />
 					</h:outputText>
-				</h:column>
-			</h:dataTable>
+				</p:column>
+			</p:dataTable>
 		</h:form>
 	</ui:define>
 </ui:composition>
