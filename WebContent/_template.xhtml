@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core">
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>
@@ -14,12 +15,35 @@
 <h:body>
 	<div id="cabecalho">
 		<h:graphicImage name="atento-logo.png" library="imagens" id="logoCompany"/>
+		
 		<div id="usuarioLogado">
 			<h:form rendered="#{usuarioLogadoBean.logado}">
-				Logado na sessão: #{usuarioLogadoBean.usuario.nome}
-				<h:commandLink action="#{loginBean.efetuaLogout}" value="[Sair]"/>
+				Usuário logado: #{usuarioLogadoBean.usuario.nome}
 			</h:form>	
-		</div>
+		</div>		
+	</div>
+	
+	<div id="menu">
+		<h:form rendered="#{usuarioLogadoBean.logado}">
+			<p:menubar>
+				<p:submenu label="Ações" icon="ui-icon-gear">							
+					<p:menuitem value="Tabular chamadas" icon="ui-icon-plus" url="arvore.xhtml"/>
+					<p:menuitem value="Sair" icon="ui-icon-power" action="#{loginBean.efetuaLogout}"/>
+				</p:submenu>
+				<p:submenu label="Usuário" icon="ui-icon-person">			
+					<p:menuitem value="Adicionar" icon="ui-icon-plus" url="novo-usuario.xhtml"/>
+					<p:menuitem value="Alterar senha" icon="ui-icon-locked" url="#" />
+				</p:submenu>
+				<p:submenu label="Editar" icon="ui-icon-pencil">
+					<p:menuitem value="Produto" icon="ui-icon-suitcase" url="#"/>			
+					<p:menuitem value="Árvore" icon="ui-icon-note" url="arvore.xhtml"/>
+					<p:menuitem value="Site" icon="ui-icon-home" url="#"/>
+				</p:submenu>
+				<p:submenu label="Relatórios" icon="ui-icon-document">
+					<p:menuitem value="Mensal" icon="ui-icon-calendar" url="#"/>
+				</p:submenu>
+			</p:menubar>		
+		</h:form>
 	</div>
 	
 	<div id="conteudo">
