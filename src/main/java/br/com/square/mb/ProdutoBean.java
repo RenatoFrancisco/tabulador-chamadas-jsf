@@ -3,7 +3,7 @@ package br.com.square.mb;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -11,7 +11,7 @@ import br.com.square.dao.ProdutoDao;
 import br.com.square.modelo.Produto;
 
 @Named
-@ViewScoped
+@RequestScoped
 public class ProdutoBean implements Serializable {
 	private Produto produto = new Produto();
 	private List<Produto> produtos;

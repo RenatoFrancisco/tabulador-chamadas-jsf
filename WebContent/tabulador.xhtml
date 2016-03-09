@@ -56,9 +56,9 @@
 					<h:outputLabel value="Descrição:" for="descricao"/>
 					<p:inputTextarea id="descricao" value="#{tabulacaoBean.tabulacao.descricao}" rows="5" cols="35" />
 					
-					<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-check" 
-						update=":formTabela" />
 				</h:panelGrid>
+				<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-check" 
+						update=":formTabela" />
 			</fieldset>
 		</h:form>
 		

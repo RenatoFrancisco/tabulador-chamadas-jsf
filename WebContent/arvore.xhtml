@@ -13,10 +13,10 @@
 			<h:inputHidden value="#{arvoreBean.arvoreComProduto.idArvore}"/>
 			
 			<h2>
-				<h:outputText value="Adicionar um elemento à Árvore" 
+				<h:outputText value="Adicionar Elemento na Árvore" 
 					rendered="#{arvoreBean.arvoreComProduto.idArvore == 0}"/>
 					
-				<h:outputText value="Editar um elemento da Árvore"
+				<h:outputText value="Editar Elemento da Árvore"
 					rendered="#{arvoreBean.arvoreComProduto.idArvore != 0}"/>
 			</h2>
 			
@@ -42,9 +42,9 @@
 					<h:outputLabel value="Habilitado:" for="ativo"/>
 					<p:selectBooleanCheckbox id="ativo" value="#{arvoreBean.arvoreComProduto.ativo}" />
 					
-					<p:commandButton action="#{arvoreBean.salva}" value="Salvar" update="@form :formTabela"
-						icon="ui-icon-disk"/>
 				</h:panelGrid>
+				<p:commandButton action="#{arvoreBean.salva}" value="Salvar" update="@form :formTabela"
+							icon="ui-icon-disk" />
 			</fieldset>
 		</h:form>
 		

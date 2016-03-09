@@ -13,10 +13,10 @@
 				<h:inputHidden value="#{produtoBean.produto.id}"/>
 				
 				<h2>
-					<h:outputText value="Adicionar um Produto" 
+					<h:outputText value="Adicionar Produto" 
 						rendered="#{produtoBean.produto.id == 0}"/>
 						
-					<h:outputText value="Editar um Produto"
+					<h:outputText value="Editar Produto"
 						rendered="#{produtoBean.produto.id != 0}"/>
 				</h2>
 				<fieldset>
@@ -28,9 +28,9 @@
 						<h:outputLabel value="Habilitar:" for="ativo"/>
 						<p:selectBooleanCheckbox id="ativo" value="#{produtoBean.produto.ativo}"/>
 						
-						<p:commandButton value="Salvar" action="#{produtoBean.salva}" icon="ui-icon-disk"
-							update="@form :formTabela"/>
 					</h:panelGrid>
+					<p:commandButton value="Salvar" action="#{produtoBean.salva}" icon="ui-icon-disk"
+							update="@form :formTabela"/>
 				</fieldset>
 			</h:form>	
 			

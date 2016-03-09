@@ -12,7 +12,7 @@
 			<h:inputHidden value="#{usuarioBean.usuario.id}"/>
 			
 			<h2>
-				<h:outputText value="Novo Usuário"
+				<h:outputText value="Adicionar Usuário"
 					rendered="#{usuarioBean.usuario.id == 0}"/>
 					
 			<h:outputText value="Editar Usuário"
@@ -37,15 +37,14 @@
 					</p:selectOneMenu>
 					
 					<h:outputLabel value="Senha:" for="senha"/>
-					<p:password id="senha" value="#{usuarioBean.usuario.senha}" feedback="true"/>
-					
-					<p:commandButton value="Salvar" action="#{usuarioBean.salva}" icon="ui-icon-disk" 
-						update="@form :formTabela"/>
+					<p:password id="senha" value="#{usuarioBean.usuario.senha}" feedback="true"/>	
 				</h:panelGrid>
+				<p:commandButton value="Salvar" action="#{usuarioBean.salva}" icon="ui-icon-disk" 
+						update="@form :formTabela"/>
 			</fieldset>
 		</h:form>
 		
-		<h2>Lista de Usuários</h2>
+		<h2>Usuários</h2>
 		<h:form id="formTabela">
 			<p:dataTable value="#{usuarioBean.usuarios}" var="usuario">
 				<p:column>
