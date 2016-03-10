@@ -4,12 +4,16 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import br.com.square.enums.Rechamada;
 
 @Entity
 public class Tabulacao {
@@ -19,10 +23,10 @@ public class Tabulacao {
 	private long id;
 
 	private String terminal;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Calendar dataChamada = Calendar.getInstance();
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataTabulacao = Calendar.getInstance();
 
@@ -36,6 +40,9 @@ public class Tabulacao {
 
 	@ManyToOne
 	private Usuario usuario;
+
+	@Enumerated(EnumType.STRING)
+	private Rechamada rechamada;
 
 	public Calendar getDataTabulacao() {
 		return dataTabulacao;
@@ -99,5 +106,13 @@ public class Tabulacao {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Rechamada getRechamada() {
+		return rechamada;
+	}
+
+	public void setRechamada(Rechamada rechamada) {
+		this.rechamada = rechamada;
 	}
 }
