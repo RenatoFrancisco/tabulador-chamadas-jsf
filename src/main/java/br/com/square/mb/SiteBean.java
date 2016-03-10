@@ -31,7 +31,7 @@ public class SiteBean {
 
 	public List<Site> getSites() {
 		if (this.sites == null) {
-			this.siteDao.lista();
+			this.sites = this.siteDao.lista();
 		}
 		return sites;
 	}

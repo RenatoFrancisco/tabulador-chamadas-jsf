@@ -7,7 +7,48 @@
 	  xmlns:p="http://primefaces.org/ui">
 <ui:composition template="_template.xhtml">
 	<ui:define name="corpo">
+		<h:form id="formSite">
+			<h:inputHidden value="#{siteBean.site.id}"/>
+			<h2>
+				<h:outputText value="Adicionar Site" rendered="#{siteBean.site.id == 0}"/>
+				<h:outputText value="Editar Site" rendered="#{siteBean.site.id != 0}"/>
+			</h2>
+			<fieldset>
+				<legend>Dados do Site</legend>
+				<h:panelGrid columns="2">
+					<h:outputText value="Nome:" for="nome"/>
+					<p:inputText id="nome" value="#{siteBean.site.nome}"/>
+					
+					<h:outputText value="Sigla:" for="sigla"/>
+					<p:inputText id="sigla" value="#{siteBean.site.sigla}"/>
+					
+					<h:outputText value="Habilitado:" for="habilitado"/>
+					<p:selectBooleanCheckbox id="habilitado" value="#{siteBean.site.ativo}"/>
+				</h:panelGrid>
+				<p:commandButton action="#{siteBean.salva}" value="Salvar" update="@form :formTabela" icon="ui-icon-disk"/>
+			</fieldset>
+		</h:form>
 		
+		<h2>Sites</h2>
+		<h:form id="formTabela">
+			<p:dataTable value="#{siteBean.sites}" var="site">
+				<p:column headerText="Nome">
+					#{site.nome}
+				</p:column>
+				<p:column headerText="Sigla">
+					#{site.sigla}
+				</p:column>
+				<p:column headerText="Habilitado">
+					<h:outputText value="Sim" rendered="#{site.ativo}"/>
+					<h:outputText value="Não" rendered="#{!site.ativo}"/>
+				</p:column>
+				<p:column>
+					<p:commandLink value="Alterar" update=":formSite">
+						<f:setPropertyActionListener value="#{site}" target="#{siteBean.site}" />
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

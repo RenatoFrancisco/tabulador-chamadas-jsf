@@ -15,6 +15,8 @@ public class Site {
 
 	private String sigla;
 
+	private boolean ativo;
+
 	public long getId() {
 		return id;
 	}
@@ -37,6 +39,14 @@ public class Site {
 
 	public void setSigla(String sigla) {
 		this.sigla = sigla;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }
