@@ -1,7 +1,6 @@
 package br.com.square.modelo;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
