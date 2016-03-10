@@ -17,8 +17,15 @@ public class ProdutoDao {
 
 	public List<Produto> lista() {
 		this.manager.joinTransaction();
-		return this.manager.createQuery("select p from Produto p",
+		return this.manager.createQuery("SELECT p FROM Produto p",
 				Produto.class).getResultList();
+	}
+
+	public List<Produto> listaAtivos() {
+		this.manager.joinTransaction();
+		return this.manager.createQuery(
+				"SELECT p FROM Produto p WHERE p.ativo = true", Produto.class)
+				.getResultList();
 	}
 
 	public Produto buscaPorId(long id) {
@@ -32,11 +39,11 @@ public class ProdutoDao {
 	}
 
 	public Produto buscaPorNome(String nomeProduto) {
-		String jpql = "SELECT p FROM Produto p "
-				+ "WHERE p.nome = :nome";
-		
+		String jpql = "SELECT p FROM Produto p " + "WHERE p.nome = :nome";
+
 		this.manager.joinTransaction();
-		TypedQuery<Produto> query = this.manager.createQuery(jpql, Produto.class);
+		TypedQuery<Produto> query = this.manager.createQuery(jpql,
+				Produto.class);
 		query.setParameter("nome", nomeProduto);
 		return query.getSingleResult();
 	}

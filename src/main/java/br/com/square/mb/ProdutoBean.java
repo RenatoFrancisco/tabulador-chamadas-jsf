@@ -15,6 +15,7 @@ import br.com.square.modelo.Produto;
 public class ProdutoBean implements Serializable {
 	private Produto produto = new Produto();
 	private List<Produto> produtos;
+	private List<Produto> produtosAtivos;
 
 	@Inject
 	private ProdutoDao produtoDao;
@@ -22,7 +23,7 @@ public class ProdutoBean implements Serializable {
 	public Produto getProduto() {
 		return produto;
 	}
-	
+
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
@@ -33,14 +34,21 @@ public class ProdutoBean implements Serializable {
 		}
 		return produtos;
 	}
-	
+
+	public List<Produto> getProdutosAtivos() {
+		if (this.produtosAtivos == null) {
+			this.produtosAtivos = produtoDao.listaAtivos();
+		}
+		return produtosAtivos;
+	}
+
 	public void salva() {
-		if(this.produto.getId() == 0L) {
+		if (this.produto.getId() == 0L) {
 			this.produtoDao.adiciona(this.produto);
 		} else {
 			this.produtoDao.atualiza(produto);
 		}
-		
+
 		this.listaTodos();
 		this.limpa();
 	}
@@ -48,7 +56,7 @@ public class ProdutoBean implements Serializable {
 	private void listaTodos() {
 		this.produtos = this.produtoDao.lista();
 	}
-	
+
 	private void limpa() {
 		this.produto = new Produto();
 	}

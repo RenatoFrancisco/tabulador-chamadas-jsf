@@ -25,7 +25,7 @@
 					<h:outputLabel value="Produto:" for="produto"/>
 					<p:selectOneMenu id="produto" value="#{tabulacaoBean.produtoSelecionado}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
-						<f:selectItems value="#{produtoBean.produtos}" var="produto"
+						<f:selectItems value="#{produtoBean.produtosAtivos}" var="produto"
 							itemValue="#{produto.id}" itemLabel="#{produto.nome}" />
 						<f:ajax execute="@this" render="motivo"/>
 					</p:selectOneMenu>
