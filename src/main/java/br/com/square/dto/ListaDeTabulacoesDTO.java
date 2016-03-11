@@ -2,10 +2,14 @@ package br.com.square.dto;
 
 import java.util.Calendar;
 
+import br.com.square.enums.Rechamada;
+
 public class ListaDeTabulacoesDTO {
 
 	private Calendar dataChamada;
 	private String terminal;
+	private String siglaSite;
+	private String rechamada;
 	private String produto;
 	private String motivo;
 	private String submotivo;
@@ -15,17 +19,20 @@ public class ListaDeTabulacoesDTO {
 	private Calendar dataTabulacao;
 
 	public ListaDeTabulacoesDTO(Calendar dataChamada, String terminal,
-			String produto, String motivo, String submotivo, String detalhe,
-			String descricao, String nomeUsuario, Calendar dataTabulacao) {
+			String siglaSite, Rechamada rechamada, String produto,
+			String motivo, String submotivo, String detalhe, String descricao,
+			String nomeUsuario, Calendar dataTabulacao) {
 
 		this.dataChamada = dataChamada;
 		this.terminal = terminal;
+		this.siglaSite = siglaSite;
+		this.rechamada = rechamada.toString();
 		this.produto = produto;
 		this.motivo = motivo;
 		this.submotivo = submotivo;
 		this.detalhe = detalhe;
 		this.descricao = descricao;
-		this.setNomeUsuario(nomeUsuario);
+		this.nomeUsuario = nomeUsuario;
 		this.dataTabulacao = dataTabulacao;
 	}
 
@@ -99,6 +106,22 @@ public class ListaDeTabulacoesDTO {
 
 	public void setNomeUsuario(String nomeUsuario) {
 		this.nomeUsuario = nomeUsuario;
+	}
+
+	public String getSiglaSite() {
+		return siglaSite;
+	}
+
+	public void setSiglaSite(String siglaSite) {
+		this.siglaSite = siglaSite;
+	}
+
+	public String getRechamada() {
+		return rechamada;
+	}
+
+	public void setRechamada(String rechamada) {
+		this.rechamada = rechamada;
 	}
 
 }

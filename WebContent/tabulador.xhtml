@@ -11,7 +11,7 @@
 		<h2>Tabular Chamadas</h2>
 		<h:form>
 			<fieldset>
-				<legend>Dados da Tabulação</legend>
+				<legend>Dados da Chamada</legend>
 				<h:panelGrid columns="2">	
 							
 					<h:outputLabel value="Data da Chamada:" for="dtChamada"/>
@@ -22,42 +22,58 @@
 					<p:inputMask id="terminal" value="#{tabulacaoBean.tabulacao.terminal}"
 						mask="(99) 9999-9999"/>
 					
-					<h:outputLabel value="Produto:" for="produto"/>
-					<p:selectOneMenu id="produto" value="#{tabulacaoBean.produtoSelecionado}">
+					<h:outputLabel value="Site:" for="site"/>
+					<p:selectOneMenu id="site" value="#{tabulacaoBean.siteSelecionado}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
-						<f:selectItems value="#{produtoBean.produtosAtivos}" var="produto"
-							itemValue="#{produto.id}" itemLabel="#{produto.nome}" />
-						<f:ajax execute="@this" render="motivo"/>
+						<f:selectItems value="#{siteBean.sitesAtivos}" var="site"
+							itemValue="#{site.id}" itemLabel="#{site.sigla}"/>
 					</p:selectOneMenu>
 					
-					<h:outputLabel value="Motivo:" for="motivo"/>
-					<p:selectOneMenu id="motivo" value="#{tabulacaoBean.motivoSelecionado}">
+					<h:outputLabel value="Rechamada:" for="rechamada"/>
+					<p:selectOneMenu id="rechamada" value="#{tabulacaoBean.tabulacao.rechamada}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
-						<f:selectItems value="#{tabulacaoBean.motivos}" var="motivo"
-							itemValue="#{motivo}" itemLabel="#{motivo}"/>
-						<f:ajax excute="@this" render="submotivo"/>
+						<f:selectItems value="#{tabulacaoBean.rechamadas}"/>
 					</p:selectOneMenu>
-					
-					<h:outputLabel value="Submotivo:" for="submotivo"/>
-					<p:selectOneMenu id="submotivo" value="#{tabulacaoBean.subMotivoSelecionado}">
-						<f:selectItem itemLabel="-- Selecione -- " noSelectionOption="true"/>
-						<f:selectItems value="#{tabulacaoBean.subMotivos}" var="submotivo"
-							itemValue="#{submotivo}" itemLabel="#{submotivo}" />
-						<f:ajax execute="@this" render="detalhe"/>
-					</p:selectOneMenu>
-					
-					<h:outputLabel value="Detalhe:" for="detalhe"/>
-					<p:selectOneMenu id="detalhe" value="#{tabulacaoBean.detalheSelecionado}">
-						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
-						<f:selectItems value="#{tabulacaoBean.detalhes}" var="detalhe"
-							itemValue="#{detalhe}" itemLabel="#{detalhe}" />
-					</p:selectOneMenu>
-					
-					<h:outputLabel value="Descrição:" for="descricao"/>
-					<p:inputTextarea id="descricao" value="#{tabulacaoBean.tabulacao.descricao}" rows="5" cols="35" />
-					
 				</h:panelGrid>
-				<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-check" 
+			</fieldset>
+			<fieldset>	
+				<legend>Dados da Tabulação</legend>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Produto:" for="produto"/>
+						<p:selectOneMenu id="produto" value="#{tabulacaoBean.produtoSelecionado}">
+							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
+							<f:selectItems value="#{produtoBean.produtosAtivos}" var="produto"
+								itemValue="#{produto.id}" itemLabel="#{produto.nome}" />
+							<f:ajax execute="@this" render="motivo"/>
+						</p:selectOneMenu>
+						
+						<h:outputLabel value="Motivo:" for="motivo"/>
+						<p:selectOneMenu id="motivo" value="#{tabulacaoBean.motivoSelecionado}">
+							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
+							<f:selectItems value="#{tabulacaoBean.motivos}" var="motivo"
+								itemValue="#{motivo}" itemLabel="#{motivo}"/>
+							<f:ajax excute="@this" render="submotivo"/>
+						</p:selectOneMenu>
+						
+						<h:outputLabel value="Submotivo:" for="submotivo"/>
+						<p:selectOneMenu id="submotivo" value="#{tabulacaoBean.subMotivoSelecionado}">
+							<f:selectItem itemLabel="-- Selecione -- " noSelectionOption="true"/>
+							<f:selectItems value="#{tabulacaoBean.subMotivos}" var="submotivo"
+								itemValue="#{submotivo}" itemLabel="#{submotivo}" />
+							<f:ajax execute="@this" render="detalhe"/>
+						</p:selectOneMenu>
+						
+						<h:outputLabel value="Detalhe:" for="detalhe"/>
+						<p:selectOneMenu id="detalhe" value="#{tabulacaoBean.detalheSelecionado}">
+							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
+							<f:selectItems value="#{tabulacaoBean.detalhes}" var="detalhe"
+								itemValue="#{detalhe}" itemLabel="#{detalhe}" />
+						</p:selectOneMenu>
+						
+						<h:outputLabel value="Descrição:" for="descricao"/>
+						<p:inputTextarea id="descricao" value="#{tabulacaoBean.tabulacao.descricao}" rows="5" cols="35" />
+					</h:panelGrid>
+					<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-check" 
 						update=":formTabela" />
 			</fieldset>
 		</h:form>
@@ -82,6 +98,16 @@
 				<p:column>
 					<f:facet name="header">Terminal</f:facet>
 					#{tabulacao.terminal}
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Site</f:facet>
+					#{tabulacao.siglaSite}	
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Rechamada</f:facet>
+					#{tabulacao.rechamada}
 				</p:column>
 				
 				<p:column>

@@ -1,5 +1,6 @@
 package br.com.square.mb;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -11,7 +12,7 @@ import br.com.square.modelo.Site;
 
 @Named
 @RequestScoped
-public class SiteBean {
+public class SiteBean implements Serializable{
 	private Site site = new Site();
 
 	private List<Site> sites;

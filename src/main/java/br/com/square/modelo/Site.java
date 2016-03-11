@@ -23,6 +23,9 @@ public class Site {
 	@OneToMany(mappedBy = "site")
 	private List<Usuario> usuarios;
 
+	@OneToMany(mappedBy = "site")
+	private List<Tabulacao> tabulacoes;
+
 	public long getId() {
 		return id;
 	}
@@ -61,6 +64,14 @@ public class Site {
 
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
+	}
+
+	public List<Tabulacao> getTabulacoes() {
+		return tabulacoes;
+	}
+
+	public void setTabulacoes(List<Tabulacao> tabulacoes) {
+		this.tabulacoes = tabulacoes;
 	}
 
 }

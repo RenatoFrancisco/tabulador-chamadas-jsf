@@ -43,6 +43,9 @@ public class Tabulacao {
 	@Enumerated(EnumType.STRING)
 	private Rechamada rechamada;
 
+	@ManyToOne
+	private Site site;
+
 	public Calendar getDataTabulacao() {
 		return dataTabulacao;
 	}
@@ -113,5 +116,13 @@ public class Tabulacao {
 
 	public void setRechamada(Rechamada rechamada) {
 		this.rechamada = rechamada;
+	}
+
+	public Site getSite() {
+		return site;
+	}
+
+	public void setSite(Site site) {
+		this.site = site;
 	}
 }

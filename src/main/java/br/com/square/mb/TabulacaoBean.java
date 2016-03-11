@@ -9,11 +9,14 @@ import javax.inject.Named;
 
 import br.com.square.dao.ArvoreDao;
 import br.com.square.dao.ProdutoDao;
+import br.com.square.dao.SiteDao;
 import br.com.square.dao.TabulacaoDao;
 import br.com.square.dao.UsuarioDao;
 import br.com.square.dto.ListaDeTabulacoesDTO;
+import br.com.square.enums.Rechamada;
 import br.com.square.modelo.Arvore;
 import br.com.square.modelo.Produto;
+import br.com.square.modelo.Site;
 import br.com.square.modelo.Tabulacao;
 import br.com.square.modelo.Usuario;
 
@@ -30,6 +33,7 @@ public class TabulacaoBean implements Serializable {
 	private String motivoSelecionado;
 	private String subMotivoSelecionado;
 	private String detalheSelecionado;
+	private long siteSelecionado;
 
 	@Inject
 	private ArvoreDao arvoreDao;
@@ -42,6 +46,9 @@ public class TabulacaoBean implements Serializable {
 
 	@Inject
 	private UsuarioDao usuarioDao;
+
+	@Inject
+	private SiteDao siteDao;
 
 	// Recupera o Usuário logado na Sessão...
 	@Inject
@@ -107,6 +114,10 @@ public class TabulacaoBean implements Serializable {
 		return tabulacoes;
 	}
 
+	public Rechamada[] getRechamadas() {
+		return Rechamada.values();
+	}
+
 	public String limpa() {
 		return "tabulador?faces-redirect=true";
 	}
@@ -121,8 +132,10 @@ public class TabulacaoBean implements Serializable {
 		// RECUPERA O USUÁRIO DA SESSÃO...
 		Usuario usuario = this.usuarioLogado.getUsuario();
 
+		Site site = this.siteDao.buscaPorId(this.siteSelecionado);
+
 		// INSERE OS RELACIONAMENTOS...
-		this.insereRelacionamentos(produto, arvore, usuario);
+		this.insereRelacionamentos(produto, arvore, usuario, site);
 
 		this.tabulacaoDao.adiciona(tabulacao);
 
@@ -131,9 +144,19 @@ public class TabulacaoBean implements Serializable {
 	}
 
 	private void insereRelacionamentos(Produto produto, Arvore arvore,
-			Usuario usuario) {
+			Usuario usuario, Site site) {
 		this.tabulacao.setProduto(produto);
 		this.tabulacao.setArvore(arvore);
 		this.tabulacao.setUsuario(usuario);
+		this.tabulacao.setSite(site);
 	}
+
+	public long getSiteSelecionado() {
+		return siteSelecionado;
+	}
+
+	public void setSiteSelecionado(long siteSelecionado) {
+		this.siteSelecionado = siteSelecionado;
+	}
+
 }

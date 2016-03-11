@@ -25,6 +25,8 @@ public class TabulacaoDao {
 		String jpql = "SELECT NEW br.com.square.dto.ListaDeTabulacoesDTO("
 					+ "t.dataChamada, "
 					+ "t.terminal, "
+					+ "t.site.sigla, "
+					+ "t.rechamada, "
 					+ "t.produto.nome, "
 					+ "t.arvore.motivo, "
 					+ "t.arvore.submotivo, "
