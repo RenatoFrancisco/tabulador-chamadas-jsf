@@ -21,13 +21,16 @@ public class Usuario {
 	private String email;
 
 	private String senha;
-	
+
 	@ManyToOne
 	private Perfil perfil;
 
 	@OneToMany(mappedBy = "usuario")
 	List<Tabulacao> tabulacoes;
-	
+
+	@ManyToOne
+	private Site site;
+
 	public boolean isAdministrador() {
 		return "Administrador".equals(this.perfil.getNome());
 	}
@@ -78,6 +81,14 @@ public class Usuario {
 
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
+	}
+
+	public Site getSite() {
+		return site;
+	}
+
+	public void setSite(Site site) {
+		this.site = site;
 	}
 
 }

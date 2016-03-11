@@ -7,8 +7,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.square.dao.PerfilDao;
+import br.com.square.dao.SiteDao;
 import br.com.square.dao.UsuarioDao;
 import br.com.square.modelo.Perfil;
+import br.com.square.modelo.Site;
 import br.com.square.modelo.Usuario;
 
 @Named
@@ -16,6 +18,7 @@ import br.com.square.modelo.Usuario;
 public class UsuarioBean {
 	private Usuario usuario = new Usuario();
 	private String perfilNome;
+	private String siteSigla;
 	private List<Usuario> usuarios;
 	private List<Perfil> perfis;
 
@@ -25,19 +28,28 @@ public class UsuarioBean {
 	@Inject
 	private PerfilDao perfilDao;
 
+	@Inject
+	private SiteDao siteDao;
+
 	public void salva() {
+		System.out.println("Sigla do site " + this.siteSigla);
 		Perfil perfil = this.perfilDao.buscaPorNome(this.perfilNome);
+		Site site = this.siteDao.buscaPorSigla(this.siteSigla);
+		insereRelacionamentos(perfil, site);
 
 		if (this.usuario.getId() == 0L) {
-			this.usuario.setPerfil(perfil);
 			this.usuarioDao.adiciona(this.usuario);
 		} else {
-			this.usuario.setPerfil(perfil);
 			this.usuarioDao.atualiza(usuario);
 		}
 
 		this.limpa();
 		this.listaTodos();
+	}
+
+	private void insereRelacionamentos(Perfil perfil, Site site) {
+		this.usuario.setPerfil(perfil);
+		this.usuario.setSite(site);
 	}
 
 	public void remove(Usuario usuario) {
@@ -74,13 +86,24 @@ public class UsuarioBean {
 		}
 		return perfis;
 	}
-
+	
+	public String getSiteSigla() {
+		return siteSigla;
+	}
+	
+	public void setSiteSigla(String siteSigla) {
+		this.siteSigla = siteSigla;
+	}
+		
 	private void limpa() {
 		this.usuario = new Usuario();
 		this.perfilNome = null;
+		this.siteSigla = null;
 	}
 
 	private void listaTodos() {
 		this.usuarios = usuarioDao.lista();
 	}
+
+
 }

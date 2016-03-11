@@ -1,9 +1,12 @@
 package br.com.square.modelo;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Site {
@@ -16,6 +19,9 @@ public class Site {
 	private String sigla;
 
 	private boolean ativo;
+
+	@OneToMany(mappedBy = "site")
+	private List<Usuario> usuarios;
 
 	public long getId() {
 		return id;
@@ -47,6 +53,14 @@ public class Site {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 }

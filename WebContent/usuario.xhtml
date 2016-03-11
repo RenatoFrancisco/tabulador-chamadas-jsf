@@ -28,6 +28,13 @@
 					<h:outputLabel value="E-mail:" for="email"/>
 					<p:inputText id="email" value="#{usuarioBean.usuario.email}" />
 					
+					<h:outputLabel value="Site:" for="site"/>
+					<p:selectOneMenu id="site" value="#{usuarioBean.siteSigla}">
+						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
+						<f:selectItems value="#{siteBean.sitesAtivos}" var="site"
+							itemValue="#{site.sigla}" itemLabel="#{site.sigla}"/>
+					</p:selectOneMenu>
+										
 					<h:outputLabel value="Perfil:" for="perfil"/>
 					<p:selectOneMenu id="perfil" value="#{usuarioBean.perfilNome}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
@@ -58,6 +65,11 @@
 				</p:column>
 				
 				<p:column>
+					<f:facet name="header">Site</f:facet>
+					#{usuario.site.sigla}
+				</p:column>
+				
+				<p:column>
 					<f:facet name="header">Perfil</f:facet>
 					#{usuario.perfil.nome}
 				</p:column>
@@ -67,9 +79,10 @@
 						update="@form"/>
 				</p:column>
 				<p:column>
-					<p:commandLink value="Alterar" update=":formUsuario :formTabela">
+					<p:commandLink value="Alterar" update=":formUsuario">
 						<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}" />
 						<f:setPropertyActionListener value="#{usuario.perfil.nome}" target="#{usuarioBean.perfilNome}" />
+						<f:setPropertyActionListener value="#{usuario.site.sigla}" target="#{usuarioBean.siteSigla}" />
 					</p:commandLink>
 				</p:column>
 			</p:dataTable>

@@ -26,7 +26,7 @@
 					<h:outputLabel value="Produto" for="produto" />
 					<p:selectOneMenu id="produto" value="#{arvoreBean.produtoSelecionado}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
-						<f:selectItems value="#{produtoBean.produtos}" var="produto"
+						<f:selectItems value="#{produtoBean.produtosAtivos}" var="produto"
 							 itemValue="#{produto.nome}" itemLabel="#{produto.nome}" />
 					</p:selectOneMenu>
 					
