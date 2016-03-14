@@ -15,7 +15,6 @@
 <h:body>
 	<div id="cabecalho">
 		<h:graphicImage name="atento-logo.png" library="imagens" id="logoCompany"/>
-		
 		<div id="usuarioLogado">
 			<h:form rendered="#{usuarioLogadoBean.logado}">
 				Usuário logado: #{usuarioLogadoBean.usuario.nome}
@@ -23,35 +22,47 @@
 		</div>		
 	</div>
 	
-	<div id="menu">
-		<h:form rendered="#{usuarioLogadoBean.logado}">
-			<p:menubar>
-				<p:submenu label="Ações" icon="ui-icon-gear">							
-					<p:menuitem value="Tabular chamadas" icon="ui-icon-plus" url="tabulador.xhtml"/>
-					<p:menuitem value="Sair" icon="ui-icon-power" action="#{loginBean.efetuaLogout}"/>
-				</p:submenu>
-				<p:submenu label="Usuário" icon="ui-icon-person">			
-					<p:menuitem value="Adicionar" icon="ui-icon-plus" url="usuario.xhtml"
-						disabled="#{!usuarioLogadoBean.usuario.administrador}"/>
-					<p:menuitem value="Alterar senha" icon="ui-icon-locked" url="#" />
-				</p:submenu>
-				<p:submenu label="Editar" icon="ui-icon-pencil" rendered="#{usuarioLogadoBean.usuario.administrador}">
-					<p:menuitem value="Produto" icon="ui-icon-suitcase" url="produto.xhtml"/>			
-					<p:menuitem value="Árvore" icon="ui-icon-note" url="arvore.xhtml"/>
-					<p:menuitem value="Site" icon="ui-icon-home" url="site.xhtml"/>
-				</p:submenu>
-				<p:submenu label="Relatórios" icon="ui-icon-document">
-					<p:submenu label="Perfil de Chamadas" icon="ui-icon-folder-open">
-						<p:menuitem value="Mensal" icon="ui-icon-calendar" url="#"/>
-					</p:submenu>
-				</p:submenu>
-			</p:menubar>		
-		</h:form>
-	</div>
-	
 	<div id="conteudo">
+		<div id="menu">
+			<h:form rendered="#{usuarioLogadoBean.logado}">
+				<p:menubar>
+					<p:submenu label="Ações" icon="ui-icon-gear">							
+						<p:menuitem value="Tabular chamadas" icon="ui-icon-plus" url="tabulador.xhtml"/>
+						<p:menuitem value="Sair" icon="ui-icon-power" action="#{loginBean.efetuaLogout}"/>
+					</p:submenu>
+					<p:submenu label="Usuário" icon="ui-icon-person">			
+						<p:menuitem value="Adicionar" icon="ui-icon-plus" url="usuario.xhtml"
+							disabled="#{!usuarioLogadoBean.usuario.administrador}"/>
+						<p:menuitem value="Alterar senha" icon="ui-icon-locked" url="#" />
+					</p:submenu>
+					<p:submenu label="Editar" icon="ui-icon-pencil" rendered="#{usuarioLogadoBean.usuario.administrador}">
+						<p:menuitem value="Produto" icon="ui-icon-suitcase" url="produto.xhtml"/>			
+						<p:menuitem value="Árvore" icon="ui-icon-note" url="arvore.xhtml"/>
+						<p:menuitem value="Site" icon="ui-icon-home" url="site.xhtml"/>
+					</p:submenu>
+					<p:submenu label="Relatórios" icon="ui-icon-document">
+						<p:submenu label="Perfil de Chamadas" icon="ui-icon-folder-open">
+							<p:menuitem value="Mensal" icon="ui-icon-calendar" url="#"/>
+						</p:submenu>
+					</p:submenu>
+				</p:menubar>		
+			</h:form>
+		</div> <!-- Fim DIV Menu -->
+		
+		<!-- SELECIONAR TEMAS -->
+		<h:form rendered="#{usuarioLogadoBean.logado}">
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Temas" for="tema"/>
+				<p:themeSwitcher id="tema" value="#{temaBean.tema}"
+					style="width:150px;">
+					<f:selectItems value="#{temaBean.temas}"/>
+					<p:ajax />
+				</p:themeSwitcher>
+			</h:panelGrid>
+		</h:form>
+		
 		<ui:insert name="corpo"/>
-	</div>
+	</div> <!-- Fim DIV conteúdo -->
 	
 	<div id="rodape">
 		Desenvolvido por Renato Francisco da Silva.
