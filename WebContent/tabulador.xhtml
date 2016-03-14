@@ -83,8 +83,8 @@
 		<h2>Tabulações</h2>
 			
 		<h:form id="formTabela">
-			<p:dataTable value="#{tabulacaoBean.tabulacoes}" var="tabulacao"
-				paginator="true" rows="10">
+			<p:dataTable value="#{tabulacaoBean.dataModel}" var="tabulacao"
+				paginator="true" rows="20" lazy="true">
 				
 				<p:column sortBy="#{tabulacao.dataChamada.time}">
 					<f:facet name="header">Data da Chamada</f:facet>

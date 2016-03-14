@@ -43,4 +43,39 @@ public class TabulacaoDao {
 		return query.getResultList();
 	}
 
+	public List<ListaDeTabulacoesDTO> listaTodosPaginada(int inicio,
+			int quantidade) {
+		
+		String jpql = "SELECT NEW br.com.square.dto.ListaDeTabulacoesDTO("
+				+ "t.dataChamada, "
+				+ "t.terminal, "
+				+ "t.site.sigla, "
+				+ "t.rechamada, "
+				+ "t.produto.nome, "
+				+ "t.arvore.motivo, "
+				+ "t.arvore.submotivo, "
+				+ "t.arvore.detalhe,"
+				+ "t.descricao, "
+				+ "t.usuario.nome, "
+				+ "t.dataTabulacao"
+			+ ") "
+			+ "FROM Tabulacao t "
+			+ "ORDER BY t.dataTabulacao DESC";
+		
+		this.manager.joinTransaction();
+		List<ListaDeTabulacoesDTO> lista = this.manager.createQuery(jpql, ListaDeTabulacoesDTO.class)
+			.setFirstResult(inicio)
+			.setMaxResults(quantidade)
+			.getResultList();
+		
+		return lista;
+	}
+
+	public int ContaTodos() {
+		this.manager.joinTransaction();
+		long result = (Long) this.manager.createQuery("SELECT COUNT(t) FROM Tabulacao t")
+								.getSingleResult();
+		return (int) result;
+	}
+
 }

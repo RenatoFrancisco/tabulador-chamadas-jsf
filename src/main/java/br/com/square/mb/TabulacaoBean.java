@@ -12,6 +12,7 @@ import br.com.square.dao.ProdutoDao;
 import br.com.square.dao.SiteDao;
 import br.com.square.dao.TabulacaoDao;
 import br.com.square.dao.UsuarioDao;
+import br.com.square.datamodel.DataModelTabulacoes;
 import br.com.square.dto.ListaDeTabulacoesDTO;
 import br.com.square.enums.Rechamada;
 import br.com.square.modelo.Arvore;
@@ -49,6 +50,9 @@ public class TabulacaoBean implements Serializable {
 
 	@Inject
 	private SiteDao siteDao;
+	
+	@Inject
+	private DataModelTabulacoes dataModel;
 
 	// Recupera o Usuário logado na Sessão...
 	@Inject
@@ -116,6 +120,10 @@ public class TabulacaoBean implements Serializable {
 
 	public Rechamada[] getRechamadas() {
 		return Rechamada.values();
+	}
+	
+	public DataModelTabulacoes getDataModel() {
+		return dataModel;
 	}
 
 	public String limpa() {
