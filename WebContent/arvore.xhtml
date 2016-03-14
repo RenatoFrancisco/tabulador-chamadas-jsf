@@ -23,23 +23,23 @@
 			<fieldset>
 				<legend>Dados da Árvore</legend>
 				<h:panelGrid columns="2">
-					<h:outputLabel value="Produto" for="produto" />
+					<p:outputLabel value="Produto" for="produto" />
 					<p:selectOneMenu id="produto" value="#{arvoreBean.produtoSelecionado}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
 						<f:selectItems value="#{produtoBean.produtosAtivos}" var="produto"
 							 itemValue="#{produto.nome}" itemLabel="#{produto.nome}" />
 					</p:selectOneMenu>
 					
-					<h:outputLabel value="Motivo:" for="motivo"/>
+					<p:outputLabel value="Motivo:" for="motivo"/>
 					<p:inputText id="motivo" value="#{arvoreBean.arvoreComProduto.motivo}" />
 					
-					<h:outputLabel value="Submotivo:" for="submotivo"/>
+					<p:outputLabel value="Submotivo:" for="submotivo"/>
 					<p:inputText id="submotivo" value="#{arvoreBean.arvoreComProduto.submotivo}" />
 					
-					<h:outputLabel value="Detalhe:" for="detalhe"/>
+					<p:outputLabel value="Detalhe:" for="detalhe"/>
 					<p:inputText id="detalhe" value="#{arvoreBean.arvoreComProduto.detalhe}" />
 					
-					<h:outputLabel value="Habilitado:" for="ativo"/>
+					<p:outputLabel value="Habilitado:" for="ativo"/>
 					<p:selectBooleanCheckbox id="ativo" value="#{arvoreBean.arvoreComProduto.ativo}" />
 					
 				</h:panelGrid>

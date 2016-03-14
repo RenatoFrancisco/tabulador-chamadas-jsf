@@ -13,10 +13,10 @@
 			<fieldset>
 				<legend>Dados do Login</legend>
 				<h:panelGrid columns="2">
-					<h:outputLabel value="E-mail:" for="email"/>
+					<p:outputLabel value="E-mail:" for="email"/>
 					<p:inputText id="email" value="#{loginBean.usuario.email}" />
 					
-					<h:outputLabel value="Senha:" for="senha" />
+					<p:outputLabel value="Senha:" for="senha" />
 					<p:password id="senha" value="#{loginBean.usuario.senha}"/>					
 				</h:panelGrid>
 				<p:commandButton action="#{loginBean.efetuaLogin}" value="Efetuar Login" 

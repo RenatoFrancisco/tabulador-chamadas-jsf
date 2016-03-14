@@ -16,13 +16,13 @@
 			<fieldset>
 				<legend>Dados do Site</legend>
 				<h:panelGrid columns="2">
-					<h:outputText value="Nome:" for="nome"/>
+					<p:outputLabel value="Nome:" for="nome"/>
 					<p:inputText id="nome" value="#{siteBean.site.nome}"/>
 					
-					<h:outputText value="Sigla:" for="sigla"/>
+					<p:outputLabel value="Sigla:" for="sigla"/>
 					<p:inputText id="sigla" value="#{siteBean.site.sigla}"/>
 					
-					<h:outputText value="Habilitado:" for="habilitado"/>
+					<p:outputLabel value="Habilitado:" for="habilitado"/>
 					<p:selectBooleanCheckbox id="habilitado" value="#{siteBean.site.ativo}"/>
 				</h:panelGrid>
 				<p:commandButton action="#{siteBean.salva}" value="Salvar" update="@form :formTabela" icon="ui-icon-disk"/>

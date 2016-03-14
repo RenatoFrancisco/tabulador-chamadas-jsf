@@ -51,8 +51,8 @@
 		
 		<!-- SELECIONAR TEMAS -->
 		<h:form rendered="#{usuarioLogadoBean.logado}">
-			<h:panelGrid columns="2">
-				<p:outputLabel value="Temas" for="tema"/>
+			<h:panelGrid columns="2" style="position:relative; left:580px;">
+				<p:outputLabel value="Temas:" for="tema"/>
 				<p:themeSwitcher id="tema" value="#{temaBean.tema}"
 					style="width:150px;">
 					<f:selectItems value="#{temaBean.temas}"/>
