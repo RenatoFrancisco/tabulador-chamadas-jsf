@@ -1,20 +1,22 @@
 package br.com.square.mb;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.square.dao.ArvoreDao;
 import br.com.square.dao.ProdutoDao;
+import br.com.square.datamodel.DataModelArvore;
 import br.com.square.dto.ListaDeArvoreComProdutosDTO;
 import br.com.square.modelo.Arvore;
 import br.com.square.modelo.Produto;
 
 @Named
-@RequestScoped
-public class ArvoreBean {
+@ViewScoped
+public class ArvoreBean implements Serializable{
 	private Arvore arvore = new Arvore();
 
 	private ListaDeArvoreComProdutosDTO arvoreComProduto = new ListaDeArvoreComProdutosDTO();
@@ -28,6 +30,9 @@ public class ArvoreBean {
 
 	@Inject
 	private ArvoreDao arvoreDao;
+	
+	@Inject
+	private DataModelArvore dataModel;
 
 	public Arvore getArvore() {
 		return arvore;
@@ -51,6 +56,10 @@ public class ArvoreBean {
 
 	public ListaDeArvoreComProdutosDTO getArvoreComProduto() {
 		return arvoreComProduto;
+	}
+	
+	public DataModelArvore getDataModel() {
+		return dataModel;
 	}
 
 	public void salva() {

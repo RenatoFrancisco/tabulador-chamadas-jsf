@@ -116,4 +116,35 @@ public class ArvoreDao {
 		this.manager.joinTransaction();
 		this.manager.merge(arvore);
 	}
+
+	public int contaTodos() {
+		this.manager.joinTransaction();
+		
+		long result = (Long) this.manager.createQuery("SELECT COUNT(a) FROM Arvore a")
+								.getSingleResult();
+		return (int) result;
+	}
+
+	public List<ListaDeArvoreComProdutosDTO> listaComProdutosPaginada(
+			int inicio, int quantidade) {
+		
+		String jpql = "SELECT NEW br.com.square.dto.ListaDeArvoreComProdutosDTO("
+				+ "p.nome, "
+				+ "a.motivo, "
+				+ "a.submotivo, "
+				+ "a.detalhe, "
+				+ "a.ativo,"
+				+ "a.id "
+				+ ") "
+				+ "FROM Arvore a "
+				+ "JOIN a.produtos p "
+				+ "ORDER BY p.nome, a.motivo";
+		
+		this.manager.joinTransaction();
+		List<ListaDeArvoreComProdutosDTO> lista = this.manager.createQuery(jpql, ListaDeArvoreComProdutosDTO.class)
+			.setFirstResult(inicio)
+			.setMaxResults(quantidade)
+			.getResultList();
+		return lista;
+	}
 }

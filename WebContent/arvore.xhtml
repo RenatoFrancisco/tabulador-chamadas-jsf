@@ -50,8 +50,9 @@
 		
 		<h2>Elementos da Árvore</h2>
 		<h:form id="formTabela">
-			<p:dataTable value="#{arvoreBean.arvores}" var="arvore"
-				paginator="true" rows="10">
+			<p:dataTable value="#{arvoreBean.dataModel}" var="arvore"
+				paginator="true" rows="10" lazy="true">
+				
 				<p:column sortBy="#{arvore.produto}">
 					<f:facet name="header">Produto</f:facet>
 					#{arvore.produto}
