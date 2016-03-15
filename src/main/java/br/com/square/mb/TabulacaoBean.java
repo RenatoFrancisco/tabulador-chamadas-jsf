@@ -6,6 +6,9 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.square.dao.ArvoreDao;
 import br.com.square.dao.ProdutoDao;
@@ -30,10 +33,19 @@ public class TabulacaoBean implements Serializable {
 	private List<String> detalhes;
 	private List<ListaDeTabulacoesDTO> tabulacoes;
 
+	@NotNull(message = "Produto deve ser selecionado.")
 	private long produtoSelecionado;
+	
+	@NotEmpty(message = "Motivo deve ser selecionado.")
 	private String motivoSelecionado;
+	
+	@NotEmpty(message = "Submotivo deve ser selecionado.")
 	private String subMotivoSelecionado;
+	
+	@NotEmpty(message = "Detalhe deve ser selecionado.")
 	private String detalheSelecionado;
+	
+	@NotNull(message = "Site deve ser selecionado.")
 	private long siteSelecionado;
 
 	@Inject

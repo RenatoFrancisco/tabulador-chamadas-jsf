@@ -10,11 +10,11 @@
 	<ui:define name="corpo">
 		<h2>Tabular Chamadas</h2>
 		<h:form>
-			<h:messages styleClass="erros"/>
+			<p:messages autoUpdate="true"/>
 			<fieldset>
 				<legend>Dados da Chamada</legend>
 				<h:panelGrid columns="2">	
-							
+								
 					<p:outputLabel value="Data da Chamada:" for="dtChamada"/>
 					<p:calendar id="dtChamada" value="#{tabulacaoBean.tabulacao.dataChamada.time}"
 						pattern="dd/MM/yyyy" mask="true" />
@@ -45,7 +45,7 @@
 							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
 							<f:selectItems value="#{produtoBean.produtosAtivos}" var="produto"
 								itemValue="#{produto.id}" itemLabel="#{produto.nome}" />
-							<f:ajax execute="@this" render="motivo"/>
+							<p:ajax process="@this" update="motivo"/>
 						</p:selectOneMenu>
 						
 						<p:outputLabel value="Motivo:" for="motivo"/>
@@ -53,7 +53,7 @@
 							<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
 							<f:selectItems value="#{tabulacaoBean.motivos}" var="motivo"
 								itemValue="#{motivo}" itemLabel="#{motivo}"/>
-							<f:ajax excute="@this" render="submotivo"/>
+							<p:ajax process="@this" update="submotivo"/>
 						</p:selectOneMenu>
 						
 						<p:outputLabel value="Submotivo:" for="submotivo"/>
@@ -61,7 +61,7 @@
 							<f:selectItem itemLabel="-- Selecione -- " noSelectionOption="true"/>
 							<f:selectItems value="#{tabulacaoBean.subMotivos}" var="submotivo"
 								itemValue="#{submotivo}" itemLabel="#{submotivo}" />
-							<f:ajax execute="@this" render="detalhe"/>
+							<p:ajax process="@this" update="detalhe"/>
 						</p:selectOneMenu>
 						
 						<p:outputLabel value="Detalhe:" for="detalhe"/>

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -29,11 +30,10 @@ public class Tabulacao {
 	private String terminal;
 
 	@Temporal(TemporalType.DATE)
-	@NotEmpty(message = "{tabulacao.datachamada.notempty}")
-	@Past(message = "{tabulacao.datachamada.past}")
 	private Calendar dataChamada = Calendar.getInstance();
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@NotNull(message = "{tabulacao.datachamada.notempty}")
 	private Calendar dataTabulacao = Calendar.getInstance();
 	
 	@Size(max = 100, message = "{tabulacao.descricao.size}")
