@@ -1,11 +1,25 @@
 package br.com.square.dto;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class ListaDeArvoreComProdutosDTO {
 	
 	private String produto;
+
+	@NotEmpty(message = "{arvore.motivo.notempty}")
+	@Size(min = 3, max = 20, message = "{arvore.motivo.size}")
 	private String motivo;
+	
+	@NotEmpty(message = "{arvore.submotivo.notempty}")
+	@Size(min = 3, max = 20, message = "{arvore.submotivo.size}")
 	private String submotivo;
+	
+	@NotEmpty(message = "{arvore.detalhe.notempty}")
+	@Size(min = 3, max = 20, message = "{arvore.detalhe.size}")
 	private String detalhe;
+	
 	private boolean ativo;
 	private long idArvore;
 

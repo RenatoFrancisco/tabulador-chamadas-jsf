@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -20,6 +21,7 @@ public class Produto {
 	private long id;
 	
 	@NotEmpty(message = "{produto.nome.notempty}")
+	@Size(min = 3, max = 20, message="{produto.nome.size}")
 	private String nome;
 
 	private boolean ativo;

@@ -7,6 +7,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import br.com.square.dao.ArvoreDao;
 import br.com.square.dao.ProdutoDao;
 import br.com.square.datamodel.DataModelArvore;
@@ -22,7 +24,8 @@ public class ArvoreBean implements Serializable{
 	private ListaDeArvoreComProdutosDTO arvoreComProduto = new ListaDeArvoreComProdutosDTO();
 
 	private List<ListaDeArvoreComProdutosDTO> arvores;
-
+	
+	@NotEmpty(message = "Produto deve ser preenchido.")
 	private String produtoSelecionado;
 
 	@Inject

@@ -12,7 +12,7 @@ import javax.inject.Named;
 public class TemaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private String tema = "bootstrap"; // Tema padrão.
+	private String tema = "humanity"; // Tema padrão.
 
 	public String getTema() {
 		return tema;
