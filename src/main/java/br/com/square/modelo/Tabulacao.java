@@ -11,6 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.square.enums.Rechamada;
 
@@ -20,15 +24,19 @@ public class Tabulacao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-
+	
+	@NotEmpty(message = "{tabulacao.terminal.notempty}")
 	private String terminal;
 
 	@Temporal(TemporalType.DATE)
+	@NotEmpty(message = "{tabulacao.datachamada.notempty}")
+	@Past(message = "{tabulacao.datachamada.past}")
 	private Calendar dataChamada = Calendar.getInstance();
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataTabulacao = Calendar.getInstance();
-
+	
+	@Size(max = 100, message = "{tabulacao.descricao.size}")
 	private String descricao;
 
 	@ManyToOne

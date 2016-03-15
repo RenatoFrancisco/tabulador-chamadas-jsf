@@ -6,6 +6,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import br.com.square.dao.PerfilDao;
 import br.com.square.dao.SiteDao;
 import br.com.square.dao.UsuarioDao;
@@ -17,8 +19,13 @@ import br.com.square.modelo.Usuario;
 @RequestScoped
 public class UsuarioBean {
 	private Usuario usuario = new Usuario();
+	
+	@NotEmpty(message = "Perfil deve ser preenchido.")
 	private String perfilNome;
+	
+	@NotEmpty(message = "Site deve ser preenchido.")
 	private String siteSigla;
+	
 	private List<Usuario> usuarios;
 	private List<Perfil> perfis;
 

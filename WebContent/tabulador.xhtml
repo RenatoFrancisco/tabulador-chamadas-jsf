@@ -10,6 +10,7 @@
 	<ui:define name="corpo">
 		<h2>Tabular Chamadas</h2>
 		<h:form>
+			<h:messages styleClass="erros"/>
 			<fieldset>
 				<legend>Dados da Chamada</legend>
 				<h:panelGrid columns="2">	
@@ -21,7 +22,7 @@
 					<p:outputLabel value="Terminal:" for="terminal"/>
 					<p:inputMask id="terminal" value="#{tabulacaoBean.tabulacao.terminal}"
 						mask="(99) 9999-9999"/>
-					
+
 					<p:outputLabel value="Site:" for="site"/>
 					<p:selectOneMenu id="site" value="#{tabulacaoBean.siteSelecionado}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
