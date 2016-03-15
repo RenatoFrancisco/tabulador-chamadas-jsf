@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -15,11 +16,13 @@ public class Site {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@NotEmpty(message = "{site.nome.notempty}")
+	@Size(min = 3, max = 20, message = "{site.nome.size}")
 	private String nome;
-	
+
 	@NotEmpty(message = "{site.sigla.notempty}")
+	@Size(min = 2, max = 3, message = "{site.sigla.size}")
 	private String sigla;
 
 	private boolean ativo;
