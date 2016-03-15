@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class Perfil {
 
@@ -15,6 +17,7 @@ public class Perfil {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@NotEmpty(message = "peril.nome.notempty")
 	private String nome;
 
 	@OneToMany(mappedBy = "perfil")

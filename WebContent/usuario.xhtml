@@ -21,12 +21,14 @@
 			
 			<fieldset>
 				<legend>Dados do Usuário</legend>
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="3">
 					<p:outputLabel value="Nome:" for="nome"/>
 					<p:inputText id="nome" value="#{usuarioBean.usuario.nome}" />
+					<p:message for="nome" />
 					
 					<p:outputLabel value="E-mail:" for="email"/>
 					<p:inputText id="email" value="#{usuarioBean.usuario.email}" />
+					<p:message for="email" />
 					
 					<p:outputLabel value="Site:" for="site"/>
 					<p:selectOneMenu id="site" value="#{usuarioBean.siteSigla}">
@@ -34,17 +36,19 @@
 						<f:selectItems value="#{siteBean.sitesAtivos}" var="site"
 							itemValue="#{site.sigla}" itemLabel="#{site.sigla}"/>
 					</p:selectOneMenu>
-										
+					<p:message for="site" />
+					
 					<p:outputLabel value="Perfil:" for="perfil"/>
 					<p:selectOneMenu id="perfil" value="#{usuarioBean.perfilNome}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
 						<f:selectItems value="#{usuarioBean.perfis}" var="perfil"
-							itemValue="#{perfil.nome}" itemLabel="#{perfil.nome}"
-						/>
+							itemValue="#{perfil.nome}" itemLabel="#{perfil.nome}" />
 					</p:selectOneMenu>
+					<p:message for="perfil" />
 					
 					<p:outputLabel value="Senha:" for="senha"/>
-					<p:password id="senha" value="#{usuarioBean.usuario.senha}" feedback="true"/>	
+					<p:password id="senha" value="#{usuarioBean.usuario.senha}" feedback="true"/>
+					<p:message for="senha" />	
 				</h:panelGrid>
 				<p:commandButton value="Salvar" action="#{usuarioBean.salva}" icon="ui-icon-disk" 
 						update="@form :formTabela"/>

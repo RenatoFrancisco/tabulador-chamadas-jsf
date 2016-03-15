@@ -8,14 +8,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class Site {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-
+	
+	@NotEmpty(message = "{site.nome.notempty}")
 	private String nome;
-
+	
+	@NotEmpty(message = "{site.sigla.notempty}")
 	private String sigla;
 
 	private boolean ativo;

@@ -8,6 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Usuario {
@@ -16,10 +20,17 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@NotEmpty(message = "{usuario.nome.notempty}")
+	@Size(min = 5, message = "{usuario.nome.size}")
 	private String nome;
 
+	@Email(message = "{usuario.email.email}")
+	@NotEmpty(message = "{usuario.email.notempty}")
+	@Size(min = 5, message = "{usuario.email.size}")
 	private String email;
 
+	@NotEmpty(message = "{usuario.senha.notempty}")
+	@Size(min = 6, max = 12, message = "{usuario.senha.size}")
 	private String senha;
 
 	@ManyToOne
