@@ -2,11 +2,13 @@ package br.com.square.dto;
 
 import java.util.Calendar;
 
+import br.com.square.enums.Periodo;
 import br.com.square.enums.Rechamada;
 
 public class ListaDeTabulacoesDTO {
 
 	private Calendar dataChamada;
+	private String periodo;
 	private String terminal;
 	private String siglaSite;
 	private String rechamada;
@@ -18,15 +20,16 @@ public class ListaDeTabulacoesDTO {
 	private String nomeUsuario;
 	private Calendar dataTabulacao;
 
-	public ListaDeTabulacoesDTO(Calendar dataChamada, String terminal,
-			String siglaSite, Rechamada rechamada, String produto,
-			String motivo, String submotivo, String detalhe, String descricao,
-			String nomeUsuario, Calendar dataTabulacao) {
+	public ListaDeTabulacoesDTO(Calendar dataChamada, Periodo periodo,
+			String terminal, String siglaSite, Rechamada rechamada,
+			String produto, String motivo, String submotivo, String detalhe,
+			String descricao, String nomeUsuario, Calendar dataTabulacao) {
 
 		this.dataChamada = dataChamada;
+		this.periodo = periodo.toString(); // Enum
 		this.terminal = terminal;
 		this.siglaSite = siglaSite;
-		this.rechamada = rechamada.toString();
+		this.rechamada = rechamada.toString(); // Enum
 		this.produto = produto;
 		this.motivo = motivo;
 		this.submotivo = submotivo;
@@ -122,6 +125,14 @@ public class ListaDeTabulacoesDTO {
 
 	public void setRechamada(String rechamada) {
 		this.rechamada = rechamada;
+	}
+
+	public String getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
 	}
 
 }

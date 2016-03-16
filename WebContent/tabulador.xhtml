@@ -81,7 +81,7 @@
 						<p:inputTextarea id="descricao" value="#{tabulacaoBean.tabulacao.descricao}" rows="5" cols="35" />
 					</h:panelGrid>
 					<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-check" 
-						update=":formTabela" />
+						update="@form :formTabela" />
 			</fieldset>
 		</h:form>
 		
@@ -102,6 +102,11 @@
 					</h:outputText>
 				</p:column>
 				
+				<p:column>
+					<f:facet name="header">Período</f:facet>
+					#{tabulacao.periodo}			
+				</p:column>
+								
 				<p:column>
 					<f:facet name="header">Terminal</f:facet>
 					#{tabulacao.terminal}

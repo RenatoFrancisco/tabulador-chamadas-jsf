@@ -36,16 +36,16 @@ public class TabulacaoBean implements Serializable {
 
 	@NotNull(message = "Produto deve ser selecionado.")
 	private long produtoSelecionado;
-	
+
 	@NotEmpty(message = "Motivo deve ser selecionado.")
 	private String motivoSelecionado;
-	
+
 	@NotEmpty(message = "Submotivo deve ser selecionado.")
 	private String subMotivoSelecionado;
-	
+
 	@NotEmpty(message = "Detalhe deve ser selecionado.")
 	private String detalheSelecionado;
-	
+
 	@NotNull(message = "Site deve ser selecionado.")
 	private long siteSelecionado;
 
@@ -63,7 +63,7 @@ public class TabulacaoBean implements Serializable {
 
 	@Inject
 	private SiteDao siteDao;
-	
+
 	@Inject
 	private DataModelTabulacoes dataModel;
 
@@ -134,20 +134,26 @@ public class TabulacaoBean implements Serializable {
 	public Rechamada[] getRechamadas() {
 		return Rechamada.values();
 	}
-	
+
 	public Periodo[] getPeriodos() {
 		return Periodo.values();
 	}
-	
+
 	public DataModelTabulacoes getDataModel() {
 		return dataModel;
 	}
 
-	public String limpa() {
-		return "tabulador?faces-redirect=true";
+	public void limpa() {
+		// return "tabulador?faces-redirect=true";
+		this.tabulacao = new Tabulacao();
+		this.produtoSelecionado = 0;
+		this.motivoSelecionado = null;
+		this.subMotivoSelecionado = null;
+		this.detalheSelecionado = null;
+		this.siteSelecionado = 0;
 	}
 
-	public String tabula() {
+	public void tabula() {
 		Produto produto = this.produtoDao.buscaPorId(this.produtoSelecionado);
 
 		Arvore arvore = this.arvoreDao.buscaPorAvoreCompleta(produto,
@@ -163,9 +169,8 @@ public class TabulacaoBean implements Serializable {
 		this.insereRelacionamentos(produto, arvore, usuario, site);
 
 		this.tabulacaoDao.adiciona(tabulacao);
-
-		// Redireciona para a mesma página para resetar os inputs.
-		return "tabulador?faces-redirect=true";
+		
+		this.limpa();
 	}
 
 	private void insereRelacionamentos(Produto produto, Arvore arvore,

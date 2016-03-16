@@ -24,6 +24,7 @@ public class TabulacaoDao {
 	public List<ListaDeTabulacoesDTO> lista() {
 		String jpql = "SELECT NEW br.com.square.dto.ListaDeTabulacoesDTO("
 					+ "t.dataChamada, "
+					+ "t.periodo, "
 					+ "t.terminal, "
 					+ "t.site.sigla, "
 					+ "t.rechamada, "
@@ -48,6 +49,7 @@ public class TabulacaoDao {
 		
 		String jpql = "SELECT NEW br.com.square.dto.ListaDeTabulacoesDTO("
 				+ "t.dataChamada, "
+				+ "t.periodo, "
 				+ "t.terminal, "
 				+ "t.site.sigla, "
 				+ "t.rechamada, "
