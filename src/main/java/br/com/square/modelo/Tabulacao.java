@@ -12,11 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import br.com.square.enums.Periodo;
 import br.com.square.enums.Rechamada;
 
 @Entity
@@ -25,17 +25,17 @@ public class Tabulacao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@NotEmpty(message = "{tabulacao.terminal.notempty}")
 	private String terminal;
 
 	@Temporal(TemporalType.DATE)
+	@NotNull(message = "{tabulacao.datachamada.notnull}")
 	private Calendar dataChamada = Calendar.getInstance();
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@NotNull(message = "{tabulacao.datachamada.notempty}")
 	private Calendar dataTabulacao = Calendar.getInstance();
-	
+
 	@Size(max = 100, message = "{tabulacao.descricao.size}")
 	private String descricao;
 
@@ -49,10 +49,15 @@ public class Tabulacao {
 	private Usuario usuario;
 
 	@Enumerated(EnumType.STRING)
+	@NotNull(message = "{tabulacao.rechamada.notnull}")
 	private Rechamada rechamada;
 
 	@ManyToOne
 	private Site site;
+
+	@Enumerated(EnumType.STRING)
+	@NotNull(message = "{tabulacao.periodo.notnull}")
+	private Periodo periodo;
 
 	public Calendar getDataTabulacao() {
 		return dataTabulacao;
@@ -132,5 +137,13 @@ public class Tabulacao {
 
 	public void setSite(Site site) {
 		this.site = site;
+	}
+
+	public Periodo getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(Periodo periodo) {
+		this.periodo = periodo;
 	}
 }

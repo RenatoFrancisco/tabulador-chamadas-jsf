@@ -19,10 +19,16 @@
 					<p:calendar id="dtChamada" value="#{tabulacaoBean.tabulacao.dataChamada.time}"
 						pattern="dd/MM/yyyy" mask="true" />
 					
+					<p:outputLabel value="Período" for="periodo"/>
+					<p:selectOneMenu id="periodo" value="#{tabulacaoBean.tabulacao.periodo}">
+						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
+						<f:selectItems value="#{tabulacaoBean.periodos}" />
+					</p:selectOneMenu>
+					
 					<p:outputLabel value="Terminal:" for="terminal"/>
 					<p:inputMask id="terminal" value="#{tabulacaoBean.tabulacao.terminal}"
 						mask="(99) 9999-9999"/>
-
+					
 					<p:outputLabel value="Site:" for="site"/>
 					<p:selectOneMenu id="site" value="#{tabulacaoBean.siteSelecionado}">
 						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>

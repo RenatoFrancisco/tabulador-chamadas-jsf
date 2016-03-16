@@ -17,6 +17,7 @@ import br.com.square.dao.TabulacaoDao;
 import br.com.square.dao.UsuarioDao;
 import br.com.square.datamodel.DataModelTabulacoes;
 import br.com.square.dto.ListaDeTabulacoesDTO;
+import br.com.square.enums.Periodo;
 import br.com.square.enums.Rechamada;
 import br.com.square.modelo.Arvore;
 import br.com.square.modelo.Produto;
@@ -132,6 +133,10 @@ public class TabulacaoBean implements Serializable {
 
 	public Rechamada[] getRechamadas() {
 		return Rechamada.values();
+	}
+	
+	public Periodo[] getPeriodos() {
+		return Periodo.values();
 	}
 	
 	public DataModelTabulacoes getDataModel() {
