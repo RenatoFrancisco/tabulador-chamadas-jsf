@@ -3,7 +3,10 @@ package br.com.square.mb;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.faces.view.facelets.FaceletContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
@@ -144,7 +147,6 @@ public class TabulacaoBean implements Serializable {
 	}
 
 	public void limpa() {
-		// return "tabulador?faces-redirect=true";
 		this.tabulacao = new Tabulacao();
 		this.produtoSelecionado = 0;
 		this.motivoSelecionado = null;
@@ -169,6 +171,9 @@ public class TabulacaoBean implements Serializable {
 		this.insereRelacionamentos(produto, arvore, usuario, site);
 
 		this.tabulacaoDao.adiciona(tabulacao);
+		
+		FacesContext.getCurrentInstance()
+			.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Tabulado com sucesso!", null));
 		
 		this.limpa();
 	}
