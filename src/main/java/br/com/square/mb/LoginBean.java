@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.view.facelets.FaceletContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -35,6 +38,8 @@ public class LoginBean implements Serializable{
 			this.usuarioLogado.loga(this.usuario);
 			return TELA_PRINCIPAL;
 		}
+		FacesContext.getCurrentInstance()
+			.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "E-mail e/ou senha inválidos", null));
 		return TELA_LOGIN;
 	}
 	
