@@ -82,6 +82,8 @@
 					</h:panelGrid>
 					<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-check" 
 						update="@form :formTabela" />
+					<p:commandButton value="Limpar" action="#{tabulacaoBean.limpa}" icon="ui-icon-trash" 
+						update="@form" immediate="true"/>
 			</fieldset>
 		</h:form>
 		
