@@ -12,6 +12,7 @@ import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.primefaces.component.tabview.TabView;
 
 import br.com.square.dao.ArvoreDao;
 import br.com.square.dao.ProdutoDao;
@@ -36,7 +37,7 @@ public class TabulacaoBean implements Serializable {
 	private List<String> subMotivos;
 	private List<String> detalhes;
 	private List<ListaDeTabulacoesDTO> tabulacoes;
-
+	
 	@NotNull(message = "Produto deve ser selecionado.")
 	private long produtoSelecionado;
 
@@ -171,10 +172,12 @@ public class TabulacaoBean implements Serializable {
 		this.insereRelacionamentos(produto, arvore, usuario, site);
 
 		this.tabulacaoDao.adiciona(tabulacao);
-		
-		FacesContext.getCurrentInstance()
-			.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Tabulado com sucesso!", null));
-		
+
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO,
+						"Tabulado com sucesso!", null));
+
 		this.limpa();
 	}
 
