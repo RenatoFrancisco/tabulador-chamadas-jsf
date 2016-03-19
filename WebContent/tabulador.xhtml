@@ -87,91 +87,13 @@
 						</fieldset>
 					</p:tab>					
 				</p:tabView>
-			<h:panelGrid columns="2">
-				<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-check" 
-						update="@form :formTabela" />
-				<p:commandButton value="Limpar" actionListener="#{tabulacaoBean.limpa}" icon="ui-icon-trash" 
-						update="@form" immediate="true"/>
-			</h:panelGrid>
-			<br />
-			<p:separator/>
-		</h:form>
-		
-		<!-- TABELA DE TABULAÇÕES-->
-		
-		<h2>Tabulações</h2>
-		<h:form id="formTabela">
-			<p:dataTable value="#{tabulacaoBean.dataModel}" var="tabulacao"
-				paginator="true" rows="20" lazy="true">
-				
-				<p:column sortBy="#{tabulacao.dataChamada.time}">
-					<f:facet name="header">Data da Chamada</f:facet>
-					<h:outputText
-						value="#{tabulacao.dataChamada.time}" >
-						<f:convertDateTime pattern="dd/MM/yyyy"
-							timeZone="America/Sao_Paulo" />
-					</h:outputText>
-				</p:column>
-				
-				<p:column>
-					<f:facet name="header">Período</f:facet>
-					#{tabulacao.periodo}			
-				</p:column>
-								
-				<p:column>
-					<f:facet name="header">Terminal</f:facet>
-					#{tabulacao.terminal}
-				</p:column>
-				
-				<p:column>
-					<f:facet name="header">Site</f:facet>
-					#{tabulacao.siglaSite}	
-				</p:column>
-				
-				<p:column>
-					<f:facet name="header">Rechamada</f:facet>
-					#{tabulacao.rechamada}
-				</p:column>
-				
-				<p:column>
-					<f:facet name="header">Produto</f:facet>
-					#{tabulacao.produto}
-				</p:column>
-				
-				<p:column>
-					<f:facet name="header">Motivo</f:facet>
-					#{tabulacao.motivo}
-				</p:column>
-				
-				<p:column>
-					<f:facet name="header">Submotivo</f:facet>
-					#{tabulacao.submotivo}
-				</p:column>
-				
-				<p:column>
-					<f:facet name="header">Detalhe</f:facet>
-					#{tabulacao.detalhe}
-				</p:column>
-				
-				<p:column>
-					<f:facet name="header">Descrição</f:facet>
-					#{tabulacao.descricao}
-				</p:column>
-				
-				<p:column>
-					<f:facet name="header">Nome do Usuário</f:facet>
-					#{tabulacao.nomeUsuario}
-				</p:column>
-				
-				<p:column>
-					<f:facet name="header">Data da Tabulacao</f:facet>
-					<h:outputText
-						value="#{tabulacao.dataTabulacao.time}" >
-						<f:convertDateTime pattern="dd/MM/yyyy - HH:mm:ss"
-							timeZone="America/Sao_Paulo" />
-					</h:outputText>
-				</p:column>
-			</p:dataTable>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-check" 
+							update="@form" />
+					
+					<p:commandButton value="Limpar" action="#{tabulacaoBean.limpa}" icon="ui-icon-trash"
+						upadate="@form" immediate="true"/>
+				</h:panelGrid>
 		</h:form>
 	</ui:define>
 </ui:composition>
