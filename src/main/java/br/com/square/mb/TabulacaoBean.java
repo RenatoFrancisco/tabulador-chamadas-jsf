@@ -170,16 +170,21 @@ public class TabulacaoBean implements Serializable {
 		this.insereRelacionamentos(produto, arvore, usuario, site);
 
 		this.tabulacaoDao.adiciona(tabulacao);
-
-		this.addMessage("Tabulado com sucesso!");
-
+		
 		this.limpa();
+		
+		this.addMessage("Sucesso", "Chamada tabulada com sucesso!");
+		
 	}
 
-	private void addMessage(String mensagem) {
+	private void addMessage(String sumario, String detalhe) {
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-				mensagem, null);
+				sumario, detalhe);
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+	
+	public String redireciona() {
+		return "tabulador?faces-redirect=true";
 	}
 
 	private void insereRelacionamentos(Produto produto, Arvore arvore,

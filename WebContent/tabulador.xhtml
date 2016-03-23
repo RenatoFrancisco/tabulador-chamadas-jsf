@@ -5,39 +5,41 @@
 	  xmlns:f="http://java.sun.com/jsf/core"
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:p="http://primefaces.org/ui">
-
 <ui:composition template="_template.xhtml">
 	<ui:define name="corpo">
 		<h2>Tabular Chamadas</h2>
-		<h:form>
-			<p:messages autoUpdate="true" />
-			<p:wizard id="tabTabulacao" nextLabel="Prosseguir" backLabel="Voltar">
+		<h:form id="formTabulacao">
+			<p:messages autoUpdate="true" showDetail="true"/>
+			<p:growl id="sucesso" showDetail="true"/>
+			
+			<p:wizard nextLabel="Prosseguir" backLabel="Voltar" widgetVar="wizard">
 				<p:tab id="chamada" title="Dados da Chamada">
-					<p:panel header="Dados da Chamada">
+					<p:panel header="Dados da Chamada" footer="Após preencher os dados, clique em Prosseguir.">
 						<h:panelGrid columns="2">	
 							<p:outputLabel value="Data da Chamada:" for="dtChamada"/>
 							<p:calendar id="dtChamada" value="#{tabulacaoBean.tabulacao.dataChamada.time}"
-								pattern="dd/MM/yyyy" mask="true" />
+								pattern="dd/MM/yyyy" mask="true" style="width:120px;"/>
 							
-							<p:outputLabel value="Período" for="periodo"/>
-							<p:selectOneMenu id="periodo" value="#{tabulacaoBean.tabulacao.periodo}">
+							
+							<p:outputLabel value="Terminal:" for="terminal"/>
+							<p:inputMask id="terminal" value="#{tabulacaoBean.tabulacao.terminal}"
+								mask="(99) 9999-9999" />
+							
+							<p:outputLabel value="Período:" for="periodo"/>
+							<p:selectOneMenu id="periodo" value="#{tabulacaoBean.tabulacao.periodo}" style="width:120px;">
 								<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
 								<f:selectItems value="#{tabulacaoBean.periodos}" />
 							</p:selectOneMenu>
 							
-							<p:outputLabel value="Terminal:" for="terminal"/>
-							<p:inputMask id="terminal" value="#{tabulacaoBean.tabulacao.terminal}"
-								mask="(99) 9999-9999"/>
-							
 							<p:outputLabel value="Site:" for="site"/>
-							<p:selectOneMenu id="site" value="#{tabulacaoBean.siteSelecionado}">
+							<p:selectOneMenu id="site" value="#{tabulacaoBean.siteSelecionado}" style="width:120px;">
 								<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
 								<f:selectItems value="#{siteBean.sitesAtivos}" var="site"
 									itemValue="#{site.id}" itemLabel="#{site.sigla}"/>
 							</p:selectOneMenu>
 							
 							<p:outputLabel value="Rechamada:" for="rechamada"/>
-							<p:selectOneMenu id="rechamada" value="#{tabulacaoBean.tabulacao.rechamada}">
+							<p:selectOneMenu id="rechamada" value="#{tabulacaoBean.tabulacao.rechamada}" style="width:120px;">
 								<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
 								<f:selectItems value="#{tabulacaoBean.rechamadas}"/>
 							</p:selectOneMenu>
@@ -49,7 +51,7 @@
 					<p:panel header="Dados da Tabulação">
 						<h:panelGrid columns="2">
 							<p:outputLabel value="Produto:" for="produto"/>
-								<p:selectOneMenu id="produto" value="#{tabulacaoBean.produtoSelecionado}">
+								<p:selectOneMenu id="produto" value="#{tabulacaoBean.produtoSelecionado}" style="width:130px;">
 									<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
 									<f:selectItems value="#{produtoBean.produtosAtivos}" var="produto"
 										itemValue="#{produto.id}" itemLabel="#{produto.nome}" />
@@ -57,7 +59,7 @@
 								</p:selectOneMenu>
 								
 								<p:outputLabel value="Motivo:" for="motivo"/>
-								<p:selectOneMenu id="motivo" value="#{tabulacaoBean.motivoSelecionado}">
+								<p:selectOneMenu id="motivo" value="#{tabulacaoBean.motivoSelecionado}" style="width:130px;">
 									<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
 									<f:selectItems value="#{tabulacaoBean.motivos}" var="motivo"
 										itemValue="#{motivo}" itemLabel="#{motivo}"/>
@@ -65,7 +67,7 @@
 								</p:selectOneMenu>
 								
 								<p:outputLabel value="Submotivo:" for="submotivo"/>
-								<p:selectOneMenu id="submotivo" value="#{tabulacaoBean.subMotivoSelecionado}">
+								<p:selectOneMenu id="submotivo" value="#{tabulacaoBean.subMotivoSelecionado}" style="width:130px;">
 									<f:selectItem itemLabel="-- Selecione -- " noSelectionOption="true"/>
 									<f:selectItems value="#{tabulacaoBean.subMotivos}" var="submotivo"
 										itemValue="#{submotivo}" itemLabel="#{submotivo}" />
@@ -73,7 +75,7 @@
 								</p:selectOneMenu>
 								
 								<p:outputLabel value="Detalhe:" for="detalhe"/>
-								<p:selectOneMenu id="detalhe" value="#{tabulacaoBean.detalheSelecionado}">
+								<p:selectOneMenu id="detalhe" value="#{tabulacaoBean.detalheSelecionado}" style="width:130px;">
 									<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true"/>
 									<f:selectItems value="#{tabulacaoBean.detalhes}" var="detalhe"
 										itemValue="#{detalhe}" itemLabel="#{detalhe}" />
@@ -85,10 +87,22 @@
 							</h:panelGrid>
 							
 							<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-check" 
-									update="@form" />
+									update="sucesso @form">
+									<p:confirm header="Confirmação" message="Confirma a tabulação da Chamada?" 
+											icon="ui-icon-alert"/>
+							</p:commandButton>
+															
+							<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+								<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+								<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+							</p:confirmDialog>
 						</p:panel>
 					</p:tab>					
 				</p:wizard>
+				<h:panelGrid columns="1">
+					<p:commandButton value="Limpar" action="#{tabulacaoBean.redireciona}" icon="ui-icon-trash" 
+						update="formTabulacao" immediate="true"/>
+				</h:panelGrid>
 			</h:form>
 		</ui:define>
 	</ui:composition>

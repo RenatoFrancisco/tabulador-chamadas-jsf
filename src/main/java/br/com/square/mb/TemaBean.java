@@ -11,7 +11,7 @@ import javax.inject.Named;
 @SessionScoped
 public class TemaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private String tema = "afternoon"; // Tema padrão.
 
 	public String getTema() {
@@ -24,13 +24,14 @@ public class TemaBean implements Serializable {
 
 	// temas disponíveis dentro do JAR
 	public List<String> getTemas() {
-		return Arrays.asList("aristo", "afternoon", "black-tie", "blitzer", "bluesky",
-				"bootstrap", "casablanca", "cupertino", "dark-hive", "dot-luv", "eggplant",
-				"excite-bike", "flick", "glass-x", "hot-sneaks", "humanity",
-				"le-frog", "midnight", "mint-choc", "overcast",
-				"pepper-grinder", "redmond", "rocket", "sam", "smoothness",
-				"south-street", "start", "sunny", "swanky-purse", "trontastic",
-				"ui-darkness", "ui-lightness", "vader");
+		return Arrays.asList("aristo", "afterdark", "afternoon", "afterwork",
+				"black-tie", "blitzer", "bluesky", "bootstrap", "casablanca",
+				"cupertino", "dark-hive", "dot-luv", "eggplant", "excite-bike",
+				"flick", "glass-x", "hot-sneaks", "humanity", "le-frog",
+				"midnight", "mint-choc", "overcast", "pepper-grinder",
+				"redmond", "rocket", "sam", "smoothness", "south-street",
+				"start", "sunny", "swanky-purse", "trontastic", "ui-darkness",
+				"ui-lightness", "vader");
 	}
 
 }
