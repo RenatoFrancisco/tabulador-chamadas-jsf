@@ -6,13 +6,11 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import javax.faces.view.facelets.FaceletContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.primefaces.component.tabview.TabView;
 
 import br.com.square.dao.ArvoreDao;
 import br.com.square.dao.ProdutoDao;
@@ -173,12 +171,15 @@ public class TabulacaoBean implements Serializable {
 
 		this.tabulacaoDao.adiciona(tabulacao);
 
-		FacesContext.getCurrentInstance().addMessage(
-				null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO,
-						"Tabulado com sucesso!", null));
+		this.addMessage("Tabulado com sucesso!");
 
 		this.limpa();
+	}
+
+	private void addMessage(String mensagem) {
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				mensagem, null);
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
 	private void insereRelacionamentos(Produto produto, Arvore arvore,

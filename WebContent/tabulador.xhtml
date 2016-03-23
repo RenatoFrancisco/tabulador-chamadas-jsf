@@ -11,12 +11,10 @@
 		<h2>Tabular Chamadas</h2>
 		<h:form>
 			<p:messages autoUpdate="true" />
-			<p:tabView id="tabTabulacao">
-				<p:tab title="Dados da Chamada">
-					<fieldset>
-						<legend>Dados da Chamada</legend>
+			<p:wizard id="tabTabulacao" nextLabel="Prosseguir" backLabel="Voltar">
+				<p:tab id="chamada" title="Dados da Chamada">
+					<p:panel header="Dados da Chamada">
 						<h:panelGrid columns="2">	
-										
 							<p:outputLabel value="Data da Chamada:" for="dtChamada"/>
 							<p:calendar id="dtChamada" value="#{tabulacaoBean.tabulacao.dataChamada.time}"
 								pattern="dd/MM/yyyy" mask="true" />
@@ -44,11 +42,11 @@
 								<f:selectItems value="#{tabulacaoBean.rechamadas}"/>
 							</p:selectOneMenu>
 						</h:panelGrid>
-					</fieldset>
+					</p:panel>
 				</p:tab>
-				<p:tab title="Dados da Tabulação">
-					<fieldset>	
-						<legend>Dados da Tabulação</legend>
+				
+				<p:tab id="tabulacao" title="Dados da Tabulação">
+					<p:panel header="Dados da Tabulação">
 						<h:panelGrid columns="2">
 							<p:outputLabel value="Produto:" for="produto"/>
 								<p:selectOneMenu id="produto" value="#{tabulacaoBean.produtoSelecionado}">
@@ -82,19 +80,16 @@
 								</p:selectOneMenu>
 								
 								<p:outputLabel value="Descrição:" for="descricao"/>
-								<p:inputTextarea id="descricao" value="#{tabulacaoBean.tabulacao.descricao}" rows="5" cols="35" />
+								<p:inputTextarea id="descricao" value="#{tabulacaoBean.tabulacao.descricao}" 
+									rows="5" cols="35" />
 							</h:panelGrid>
-						</fieldset>
+							
+							<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-check" 
+									update="@form" />
+						</p:panel>
 					</p:tab>					
-				</p:tabView>
-				<h:panelGrid columns="2">
-					<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-check" 
-							update="@form" />
-					
-					<p:commandButton value="Limpar" action="#{tabulacaoBean.limpa}" icon="ui-icon-trash"
-						upadate="@form" immediate="true"/>
-				</h:panelGrid>
-		</h:form>
-	</ui:define>
-</ui:composition>
+				</p:wizard>
+			</h:form>
+		</ui:define>
+	</ui:composition>
 </html>
