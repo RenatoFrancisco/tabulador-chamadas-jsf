@@ -14,6 +14,8 @@
 			
 			<p:wizard nextLabel="Prosseguir" backLabel="Voltar" widgetVar="wizard">
 				<p:tab id="chamada" title="Dados da Chamada">
+					<p:focus for="terminal" />
+					
 					<p:panel header="Dados da Chamada" footer="Após preencher os dados, clique em Prosseguir.">
 						<h:panelGrid columns="2">	
 							<p:outputLabel value="Data da Chamada:" for="dtChamada"/>
@@ -49,6 +51,7 @@
 				
 				<p:tab id="tabulacao" title="Dados da Tabulação">
 					<p:panel header="Dados da Tabulação">
+						<p:focus for="produto"/>
 						<h:panelGrid columns="2">
 							<p:outputLabel value="Produto:" for="produto"/>
 								<p:selectOneMenu id="produto" value="#{tabulacaoBean.produtoSelecionado}" style="width:130px;">
