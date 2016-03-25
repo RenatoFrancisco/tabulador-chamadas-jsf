@@ -87,9 +87,9 @@
 							</h:panelGrid>
 							
 							<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-check" 
-									update="sucesso @form">
+									update="sucesso @form" oncomplete="resetWizard()">
 									<p:confirm header="Confirmação" message="Confirma a tabulação da Chamada?" 
-											icon="ui-icon-alert"/>
+											icon="ui-icon-alert" />
 							</p:commandButton>
 															
 							<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
