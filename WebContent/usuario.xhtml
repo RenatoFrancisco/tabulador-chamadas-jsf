@@ -45,13 +45,33 @@
 							itemValue="#{perfil.nome}" itemLabel="#{perfil.nome}" />
 					</p:selectOneMenu>
 					<p:message for="perfil" />
-					
-					<p:outputLabel value="Senha:" for="senha"/>
-					<p:password id="senha" value="#{usuarioBean.usuario.senha}" feedback="true"/>
-					<p:message for="senha" />	
 				</h:panelGrid>
-				<p:commandButton value="Salvar" action="#{usuarioBean.salva}" icon="ui-icon-disk" 
-						update="@form :formTabela"/>
+												
+				<h:panelGrid columns="3">
+					<p:outputLabel value="Senha:" for="senha"/>
+					<p:password id="senha" value="#{usuarioBean.usuario.senha}" feedback="true" 
+							weakLabel="Fraca" goodLabel="Média" strongLabel="Forte" match="confirmacao"
+							promptLabel="Digite a senha" 
+							validatorMessage="A confirmação da senha não confere com o campo senha."
+							redisplay="true"/>
+					<p:message for="senha" />
+					
+					<p:outputLabel value="Confirme a Senha:" for="confirmacao"/>
+					<p:password id="confirmacao" value="#{usuarioBean.usuario.senha}" 
+							required="true" 
+							redisplay="true"/>
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" style="position:relative; left:130px;">	
+					<p:commandButton value="Salvar" action="#{usuarioBean.salva}" icon="ui-icon-disk" 
+							update="@form :formTabela" />
+							
+					<p:commandButton  value="Reset" 
+									icon="ui-icon-trash" 
+									action="usuario"
+									update="@form"
+									immediate="true"/>
+				</h:panelGrid>
 			</fieldset>
 		</h:form>
 		
