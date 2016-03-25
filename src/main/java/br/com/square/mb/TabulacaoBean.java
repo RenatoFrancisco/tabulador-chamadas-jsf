@@ -153,7 +153,7 @@ public class TabulacaoBean implements Serializable {
 		this.detalheSelecionado = null;
 		this.siteSelecionado = 0;
 	}
-
+	
 	public void tabula() {
 		Produto produto = this.produtoDao.buscaPorId(this.produtoSelecionado);
 
@@ -173,7 +173,7 @@ public class TabulacaoBean implements Serializable {
 		
 		this.limpa();
 		
-		this.addMessage("Sucesso", "Chamada tabulada com sucesso!");
+		this.addMessage("Info:", "Chamada tabulada com sucesso!");
 		
 	}
 

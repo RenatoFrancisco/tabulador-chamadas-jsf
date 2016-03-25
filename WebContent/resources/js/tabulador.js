@@ -1,8 +1,5 @@
 function resetWizard() {
-	wizard.loadStep(wiz.cfg.steps[0], true);
+	PF('wizard').loadStep('chamada',true)
 }
 
 
-function foca() {
-	$('#terminal').focus();
-}

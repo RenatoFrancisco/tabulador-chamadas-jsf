@@ -90,7 +90,7 @@
 							</h:panelGrid>
 							
 							<p:commandButton value="Tabular" action="#{tabulacaoBean.tabula}" icon="ui-icon-check" 
-									update="sucesso @form" oncomplete="resetWizard()">
+									update="sucesso @form" oncomplete="PF('wizard').loadStep('chamada',true)">
 									<p:confirm header="Confirmação" message="Confirma a tabulação da Chamada?" 
 											icon="ui-icon-alert" />
 							</p:commandButton>

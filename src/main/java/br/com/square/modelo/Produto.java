@@ -21,7 +21,7 @@ public class Produto {
 	private long id;
 	
 	@NotEmpty(message = "{produto.nome.notempty}")
-	@Size(min = 3, max = 20, message="{produto.nome.size}")
+	@Size(min = 2, max = 20, message="{produto.nome.size}")
 	private String nome;
 
 	private boolean ativo;
