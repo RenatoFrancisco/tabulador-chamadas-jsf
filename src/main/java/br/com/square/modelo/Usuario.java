@@ -2,6 +2,7 @@ package br.com.square.modelo;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,6 +27,7 @@ public class Usuario {
 
 	@Email(message = "{usuario.email.email}")
 	@NotEmpty(message = "{usuario.email.notempty}")
+	@Column(unique = true)
 	private String email;
 
 	@NotEmpty(message = "{usuario.senha.notempty}")

@@ -10,7 +10,7 @@
 	<ui:define name="corpo">
 		<h:form id="formUsuario">
 			
-			<p:messages showSummary="true" showDetail="true" closable="true"/>
+			<p:messages showSummary="true" closable="true" globalOnly="true"/>
 			
 			<h:inputHidden value="#{usuarioBean.usuario.id}"/>
 			
@@ -30,7 +30,7 @@
 					<p:message for="nome" />
 					
 					<p:outputLabel value="E-mail:" for="email"/>
-					<p:inputText id="email" value="#{usuarioBean.usuario.email}" />
+					<p:inputText id="email" value="#{usuarioBean.usuario.email}" validator="emailUnico"/>
 					<p:message for="email" />
 					
 					<p:outputLabel value="Site:" for="site"/>

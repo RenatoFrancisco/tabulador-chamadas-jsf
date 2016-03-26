@@ -54,7 +54,7 @@ public class UsuarioBean {
 			this.usuarioDao.atualiza(usuario);
 		}
 
-		this.addMessage("Info:", "Usuário salvo com sucesso!");
+		this.addMessage("Usuário salvo com sucesso!", null);
 
 		this.limpa();
 		this.listaTodos();
@@ -67,7 +67,7 @@ public class UsuarioBean {
 		this.usuarioDao.atualiza(usuario);
 		
 		this.usuario = new Usuario();
-		this.addMessage("Info:", "Senha alterada com sucesso!");
+		this.addMessage("Senha alterada com sucesso!", null);
 	}
 
 	private void addMessage(String sumario, String detalhe) {
