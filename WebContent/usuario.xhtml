@@ -9,6 +9,9 @@
 <ui:composition template="_template.xhtml">
 	<ui:define name="corpo">
 		<h:form id="formUsuario">
+		
+			<p:messages showSummary="true" showDetail="true" closable="true"/>
+			
 			<h:inputHidden value="#{usuarioBean.usuario.id}"/>
 			
 			<h2>
@@ -23,7 +26,7 @@
 				<legend>Dados do Usuário</legend>
 				<h:panelGrid columns="3">
 					<p:outputLabel value="Nome:" for="nome"/>
-					<p:inputText id="nome" value="#{usuarioBean.usuario.nome}" />
+					<p:inputText id="nome" value="#{usuarioBean.usuario.nome}" widgetVar="nome"/>
 					<p:message for="nome" />
 					
 					<p:outputLabel value="E-mail:" for="email"/>
@@ -103,13 +106,31 @@
 						update="@form"/>
 				</p:column>
 				<p:column>
-					<p:commandLink value="Alterar" update=":formUsuario">
+					<p:commandLink value="Alterar" update="@form :formUsuario" oncomplete="PF('dlg').show()">
 						<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}" />
 						<f:setPropertyActionListener value="#{usuario.perfil.nome}" target="#{usuarioBean.perfilNome}" />
 						<f:setPropertyActionListener value="#{usuario.site.sigla}" target="#{usuarioBean.siteSigla}" />
 					</p:commandLink>
 				</p:column>
 			</p:dataTable>
+			
+			<p:dialog widgetVar="dlg" 
+					onHide="$(function(){parent.scrollTo(0,0);PrimeFaces.focus('formUsuario:nome');});"
+					resizable="false" 
+					modal="true"
+					howEffect="fade"
+					header="Usuário selecionado:">
+					<h:panelGrid columns="2" cellpadding="10">
+						<h:outputLabel value="Nome:" />
+						<h:outputText value="#{usuarioBean.usuario.nome}" />
+						
+						<h:outputLabel value="E-mail:" />
+						<h:outputText value="#{usuarioBean.usuario.email}" />
+						
+						<h:outputLabel value="Perfil:" />
+						<h:outputText value="#{usuarioBean.perfilNome}" />
+					</h:panelGrid>
+			</p:dialog>			
 		</h:form>
 	</ui:define>
 </ui:composition>

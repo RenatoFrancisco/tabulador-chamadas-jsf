@@ -3,6 +3,8 @@ package br.com.square.mb;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -49,9 +51,16 @@ public class UsuarioBean {
 		} else {
 			this.usuarioDao.atualiza(usuario);
 		}
-
+		
+		this.addMessage("Info:", "Usuário salvo com sucesso!");
+		
 		this.limpa();
 		this.listaTodos();
+	}
+	
+	private void addMessage(String sumario, String detalhe) {
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, sumario, detalhe);
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
 	private void insereRelacionamentos(Perfil perfil, Site site) {
