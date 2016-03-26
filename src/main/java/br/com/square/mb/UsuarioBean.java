@@ -21,13 +21,16 @@ import br.com.square.modelo.Usuario;
 @RequestScoped
 public class UsuarioBean {
 	private Usuario usuario = new Usuario();
-	
+
+	@Inject
+	private UsuarioLogadoBean usuarioLogado;
+
 	@NotEmpty(message = "Perfil deve ser preenchido.")
 	private String perfilNome;
-	
+
 	@NotEmpty(message = "Site deve ser preenchido.")
 	private String siteSigla;
-	
+
 	private List<Usuario> usuarios;
 	private List<Perfil> perfis;
 
@@ -41,7 +44,6 @@ public class UsuarioBean {
 	private SiteDao siteDao;
 
 	public void salva() {
-		System.out.println("Sigla do site " + this.siteSigla);
 		Perfil perfil = this.perfilDao.buscaPorNome(this.perfilNome);
 		Site site = this.siteDao.buscaPorSigla(this.siteSigla);
 		insereRelacionamentos(perfil, site);
@@ -51,15 +53,26 @@ public class UsuarioBean {
 		} else {
 			this.usuarioDao.atualiza(usuario);
 		}
-		
-		this.addMessage("Info:", "Usuário salvo com sucesso!");
-		
+
+		this.addMessage("Usuário salvo com sucesso!", null);
+
 		this.limpa();
 		this.listaTodos();
 	}
-	
+
+	public void alteraSenha() {
+		long id = this.usuarioLogado.getUsuario().getId();
+		Usuario usuario = this.usuarioDao.buscaPorId(id);
+		usuario.setSenha(this.usuario.getSenha());
+		this.usuarioDao.atualiza(usuario);
+		
+		this.usuario = new Usuario();
+		this.addMessage("Senha alterada com sucesso!", null);
+	}
+
 	private void addMessage(String sumario, String detalhe) {
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, sumario, detalhe);
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				sumario, detalhe);
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
@@ -102,15 +115,15 @@ public class UsuarioBean {
 		}
 		return perfis;
 	}
-	
+
 	public String getSiteSigla() {
 		return siteSigla;
 	}
-	
+
 	public void setSiteSigla(String siteSigla) {
 		this.siteSigla = siteSigla;
 	}
-		
+
 	private void limpa() {
 		this.usuario = new Usuario();
 		this.perfilNome = null;
@@ -120,6 +133,5 @@ public class UsuarioBean {
 	private void listaTodos() {
 		this.usuarios = usuarioDao.lista();
 	}
-
 
 }

@@ -9,12 +9,8 @@
 <ui:composition template="_template.xhtml">
 	<ui:define name="corpo">
 		<h:form id="formUsuario">
-<<<<<<< HEAD
-		
-=======
-			
->>>>>>> dev
-			<p:messages showSummary="true" showDetail="true" closable="true"/>
+
+			<p:messages showSummary="true" closable="true" globalOnly="true"/>
 			
 			<h:inputHidden value="#{usuarioBean.usuario.id}"/>
 			
@@ -34,7 +30,7 @@
 					<p:message for="nome" />
 					
 					<p:outputLabel value="E-mail:" for="email"/>
-					<p:inputText id="email" value="#{usuarioBean.usuario.email}" />
+					<p:inputText id="email" value="#{usuarioBean.usuario.email}" validator="emailUnico"/>
 					<p:message for="email" />
 					
 					<p:outputLabel value="Site:" for="site"/>
@@ -134,11 +130,7 @@
 						<h:outputLabel value="Perfil:" />
 						<h:outputText value="#{usuarioBean.perfilNome}" />
 					</h:panelGrid>
-<<<<<<< HEAD
 			</p:dialog>			
-=======
-			</p:dialog>
->>>>>>> dev
 		</h:form>
 	</ui:define>
 </ui:composition>
