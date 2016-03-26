@@ -39,8 +39,9 @@ public class LoginBean implements Serializable{
 			return TELA_PRINCIPAL;
 		}
 		FacesContext.getCurrentInstance()
-			.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "E-mail e/ou senha inválidos", null));
-		return TELA_LOGIN;
+			.addMessage(null, 
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "E-mail e/ou senha inválidos.", null));
+		return null;
 	}
 	
 	public String efetuaLogout() {

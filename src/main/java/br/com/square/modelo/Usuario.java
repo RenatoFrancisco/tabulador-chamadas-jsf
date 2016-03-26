@@ -26,7 +26,6 @@ public class Usuario {
 
 	@Email(message = "{usuario.email.email}")
 	@NotEmpty(message = "{usuario.email.notempty}")
-	@Size(min = 5, message = "{usuario.email.size}")
 	private String email;
 
 	@NotEmpty(message = "{usuario.senha.notempty}")
