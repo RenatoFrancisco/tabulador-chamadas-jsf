@@ -20,7 +20,12 @@
 						<h:panelGrid columns="2">	
 							<p:outputLabel value="Data da Chamada:" for="dtChamada"/>
 							<p:calendar id="dtChamada" value="#{tabulacaoBean.tabulacao.dataChamada.time}"
-								pattern="dd/MM/yyyy" mask="true" style="width:120px;"/>
+									pattern="dd/MM/yyyy" mask="true" style="width:120px;"
+									locale="pt_BR"
+									maxdate="#{tabulacaoBean.tabulacao.dataChamada.time}"
+									timeZone="America/Sao_Paulo"
+									required="true" requiredMessage="A data da chamada deve ser selecionada."
+									/>
 							
 							
 							<p:outputLabel value="Terminal:" for="terminal"/>
