@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+	
+	<ui:composition template="_template.xhtml">
+		<ui:define name="corpo">
+			<h:form>
+				<p:messages id="msg" 
+						showDetail="true" 
+						showSummary="true"
+						closable="true"/>
+								
+				<p:panel id="pnlUsuario" header="Alteração de Senha">
+					<h:panelGrid columns="2" cellpadding="10">
+					
+					<h:outputLabel value="Nome:" for="nome"/>
+					<p:inputText id="nome" value="#{usuarioLogadoBean.usuario.nome}" readonly="true"/>
+						
+					<h:outputLabel value="E-mail:" for="email"/>
+					<p:inputText id="email" value="#{usuarioLogadoBean.usuario.email}" readonly="true"/>
+						
+					<p:outputLabel value="Nova Senha:" for="novaSenha"/>
+					<p:password id="novaSenha" value="#{usuarioBean.usuario.senha}" feedback="true" 
+							weakLabel="Fraca" goodLabel="Média" strongLabel="Forte" match="confirmacao"
+							promptLabel="Digite a nova senha" 
+							validatorMessage="A confirmação da senha não confere com o campo nova senha." />
+
+					<p:outputLabel value="Confirme a Senha:" for="confirmacao"/>
+					<p:password id="confirmacao" value="#{usuarioBean.usuario.senha}" 
+							required="true"
+							requiredMessage="Redigite a senha para confirmação." />
+					</h:panelGrid>
+					
+					<h:panelGrid columns="3" style="position:relative; left:130px;">
+						<p:commandButton value="Alterar" actionListener="#{usuarioBean.alteraSenha}" 
+								icon="ui-icon-check" 
+								update="msg pnlUsuario"/>
+								
+						<p:commandButton  value="Reset" 
+								icon="ui-icon-trash" 
+								action="alterarSenha"
+								update="pnlUsuario"
+								immediate="true"/>
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</html>

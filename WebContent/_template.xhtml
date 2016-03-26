@@ -37,7 +37,7 @@
 					<p:submenu label="Usuário" icon="ui-icon-person">			
 						<p:menuitem value="Adicionar" icon="ui-icon-plus" url="usuario.xhtml"
 							disabled="#{!usuarioLogadoBean.usuario.administrador}"/>
-						<p:menuitem value="Alterar senha" icon="ui-icon-locked" url="#" />
+						<p:menuitem value="Alterar senha" icon="ui-icon-locked" url="alterarSenha.xhtml" />
 					</p:submenu>
 					<p:submenu label="Editar" icon="ui-icon-pencil" rendered="#{usuarioLogadoBean.usuario.administrador}">
 						<p:menuitem value="Produto" icon="ui-icon-suitcase" url="produto.xhtml"/>			
