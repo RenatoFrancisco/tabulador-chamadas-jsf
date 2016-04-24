@@ -82,11 +82,11 @@
 					<h:outputText value="Não"  rendered="#{!arvore.ativo}"/>
 				</p:column>
 				
-				<p:column>
-					<p:commandLink value="Alterar" update=":formArvore">
+				<p:column headerText="Editar Árvore">
+					<p:commandButton value="Editar" update=":formArvore" icon="ui-icon-pencil">
 						<f:setPropertyActionListener value="#{arvore}" target="#{arvoreBean.arvoreComProduto}" />
 						<f:setPropertyActionListener value="#{arvore.produto}" target="#{arvoreBean.produtoSelecionado}" />
-					</p:commandLink>
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 		</h:form>

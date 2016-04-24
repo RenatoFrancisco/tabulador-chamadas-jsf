@@ -43,10 +43,11 @@
 					<h:outputText value="Sim" rendered="#{site.ativo}"/>
 					<h:outputText value="Não" rendered="#{!site.ativo}"/>
 				</p:column>
-				<p:column>
-					<p:commandLink value="Alterar" update=":formSite">
+				
+				<p:column headerText="Editar Site">
+					<p:commandButton value="Editar" update=":formSite" icon="ui-icon-pencil">
 						<f:setPropertyActionListener value="#{site}" target="#{siteBean.site}" />
-					</p:commandLink>
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 		</h:form>

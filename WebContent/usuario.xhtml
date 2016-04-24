@@ -10,10 +10,9 @@
 	<ui:define name="corpo">
 		<h:form id="formUsuario">
 
+			<h:inputHidden id="idUsuario" value="#{usuarioBean.usuario.id}" />
 			<p:messages showSummary="true" closable="true" globalOnly="true"/>
-			
-			<h:inputHidden value="#{usuarioBean.usuario.id}"/>
-			
+				
 			<h2>
 				<h:outputText value="Adicionar Usuário"
 					rendered="#{usuarioBean.usuario.id == 0}"/>
@@ -30,7 +29,9 @@
 					<p:message for="nome" />
 					
 					<p:outputLabel value="E-mail:" for="email"/>
-					<p:inputText id="email" value="#{usuarioBean.usuario.email}" validator="emailUnico"/>
+					<p:inputText id="email" value="#{usuarioBean.usuario.email}" >
+<!-- 						<f:validator validatorId="emailUnico"/> -->
+					</p:inputText>
 					<p:message for="email" />
 					
 					<p:outputLabel value="Site:" for="site"/>
@@ -101,16 +102,19 @@
 					#{usuario.perfil.nome}
 				</p:column>
 				
-				<p:column>
-					<p:commandLink action="#{usuarioBean.remove(usuario)}" value="Remover" 
+				<p:column headerText="Remover Usuário">
+					<p:commandButton 
+						action="#{usuarioBean.remove(usuario)}" value="Remover" icon="ui-icon-trash" 
 						update="@form"/>
 				</p:column>
-				<p:column>
-					<p:commandLink value="Alterar" update="@form :formUsuario" oncomplete="PF('dlg').show()">
+				
+				<p:column headerText="Editar Usuário">
+					<p:commandButton  value="Editar" icon="ui-icon-pencil"
+						update="@form :formUsuario" oncomplete="PF('dlg').show()" >		
 						<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}" />
 						<f:setPropertyActionListener value="#{usuario.perfil.nome}" target="#{usuarioBean.perfilNome}" />
 						<f:setPropertyActionListener value="#{usuario.site.sigla}" target="#{usuarioBean.siteSigla}" />
-					</p:commandLink>
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 			

@@ -44,10 +44,11 @@
 						<h:outputText value="Sim" rendered="#{produto.ativo}"/>
 						<h:outputText value="Não" rendered="#{!produto.ativo}"/>
 					</p:column>
-					<p:column>
-						<p:commandLink value="Alterar" update="@form :formProduto">
+					
+					<p:column headerText="Editar Produto">
+						<p:commandButton value="Editar" update="@form :formProduto" icon="ui-icon-pencil">
 							<f:setPropertyActionListener value="#{produto}" target="#{produtoBean.produto}"/>
-						</p:commandLink>
+						</p:commandButton>
 					</p:column>
 				</p:dataTable>
 			</h:form>

@@ -9,13 +9,15 @@
 	<ui:define name="corpo">
 		<h2>Tabular Chamadas</h2>
 		<h:form id="formTabulacao">
-			<p:messages autoUpdate="true" showDetail="true"/>
+		
+			<p:messages autoUpdate="true" showSummary="true"/>
 			<p:growl id="sucesso" showDetail="true"/>
 			
 			<p:wizard nextLabel="Prosseguir" backLabel="Voltar" widgetVar="wizard">
 				<p:tab id="chamada" title="Dados da Chamada">
+				
 					<p:focus for="terminal" />
-					
+						
 					<p:panel header="Dados da Chamada" footer="Após preencher os dados, clique em Prosseguir.">
 						<h:panelGrid columns="2">	
 							<p:outputLabel value="Data da Chamada:" for="dtChamada"/>
@@ -24,8 +26,7 @@
 									locale="pt_BR"
 									maxdate="#{tabulacaoBean.tabulacao.dataChamada.time}"
 									timeZone="America/Sao_Paulo"
-									required="true" requiredMessage="A data da chamada deve ser selecionada."
-									/>
+									required="true" requiredMessage="A data da chamada deve ser selecionada."/>
 							
 							
 							<p:outputLabel value="Terminal:" for="terminal"/>

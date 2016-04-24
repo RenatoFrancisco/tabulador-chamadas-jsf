@@ -16,18 +16,26 @@ public class EmailUnicoValidator implements Validator{
 	@Inject
 	private EntityManager manager;
 	
+	@Inject
+	private ComponentResolver resolver;
+	
+	
 	@Override
 	public void validate(FacesContext ctx, UIComponent component, Object value)
 			throws ValidatorException {
 		
+		String id = resolver.getSubmittedValue("idUsuario");
 		String email = String.valueOf(value);
 		String jpql = "SELECT COUNT(u) FROM Usuario u WHERE u.email LIKE :pEmail";
+		
+		System.out.println("id usuario --> " + id );
+		System.out.println("Email--> " + email );
 		
 		Query query = this.manager.createQuery(jpql);
 		query.setParameter("pEmail", email);
 		Long count =  (Long) query.getSingleResult();
 		
-		if(count != 0) {
+		if((count != 0) && (id.equals("0"))) {
 			throw new ValidatorException(new FacesMessage(
 					FacesMessage.SEVERITY_ERROR,"Usuário já cadastrado.", null));
 		}
